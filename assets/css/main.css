@@ -1,15 +1,3 @@
-/**
-* Template Name: DevFolio
-* Template URL: https://bootstrapmade.com/devfolio-bootstrap-portfolio-html-template/
-* Updated: Aug 07 2024 with Bootstrap v5.3.3
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
-
-/*--------------------------------------------------------------
-# Font & Color Variables
-# Help: https://bootstrapmade.com/color-system/
---------------------------------------------------------------*/
 /* Fonts */
 :root {
   --default-font: "Roboto",  system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
@@ -157,7 +145,7 @@ h6 {
   --heading-color: #ffffff;
   color: var(--default-color);
   background-color: var(--background-color);
-  padding: 20px 0;
+  padding: px 0;
   transition: all 0.5s;
   z-index: 997;
 }
@@ -166,9 +154,11 @@ h6 {
   line-height: 1;
 }
 
+/* Ajustar el logo en el header */
 .header .logo img {
-  max-height: 32px;
-  margin-right: 8px;
+  max-height: 80px;   /* Establece la altura máxima */
+  width: auto;        /* Mantiene la proporción de la imagen */
+  height: 80px;       /* Establece la altura fija */
 }
 
 .header .logo h1 {
