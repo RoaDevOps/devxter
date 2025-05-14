@@ -33,3 +33,6 @@ Este repositorio contiene el sitio web corporativo de DevXter, diseñado con un 
 
 ## 🗂️ Estructura del proyecto
 
+# Push forzado para redeploy
+
+
