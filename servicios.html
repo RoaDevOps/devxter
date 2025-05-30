@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Service Details - DevFolio Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <title>Servicios - DevXter</title>
+  <meta name="description" content="Servicios tecnológicos de DevXter">
+  <meta name="keywords" content="DevXter, desarrollo web, redes sociales, estrategia digital, contenido profesional">
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -15,10 +15,7 @@
   <!-- Fonts -->
   <link href="https://fonts.googleapis.com" rel="preconnect">
   <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,
-  300;1,400;1,500;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,
-  300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,
-  100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
 
   <!-- Vendor CSS Files -->
   <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -29,7 +26,6 @@
 
   <!-- Main CSS File -->
   <link href="assets/css/main.css" rel="stylesheet">
-
 </head>
 
 <body class="service-details-page">
@@ -41,13 +37,12 @@
       </a>
       <nav class="navmenu" id="navmenu">
         <ul>
-          <li><a href="servicios.html">Go!</a></li>
-          <li class="dropdown"><a href="#"><span>conocenos</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+          <li class="dropdown">
+            <a href="#"><i class="bi bi-list"></i> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
             <ul>
-              <li><a href="quienessomos .html" data-service="web">quienes sosmos devXter</a></li>
-              <li><a href="servicios.html" data-service="social">que te ofrecemos</a></li>
-              <li><a href="https://wa.me/526243204400" target="_blank">Contactanos</a></li>
-
+              <li><a href="perfil.html">Perfil</a></li>
+              <li><a href="servicios.html">Servicios DevXter</a></li>
+              <li><a href="https://wa.me/526243204400" target="_blank">Contáctanos</a></li>
             </ul>
           </li>
         </ul>
@@ -57,95 +52,82 @@
   </header>
 
   <main class="main">
-
-    <!-- Page Title -->
     <div class="page-title" data-aos="fade">
       <div class="container d-lg-flex justify-content-between align-items-center">
-        <h1 class="mb-2 mb-lg-0">Service Details</h1>
+        <h1 class="mb-2 mb-lg-0">Nuestros Servicios</h1>
         <nav class="breadcrumbs">
           <ol>
-            <li><a href="index.html">Home</a></li>
-            <li class="current">Service Details</li>
+            <li><a href="index.html">Inicio</a></li>
+            <li class="current">Servicios</li>
           </ol>
         </nav>
       </div>
-    </div><!-- End Page Title -->
+    </div>
 
-    <!-- Service Details Section -->
     <section id="service-details" class="service-details section">
-
       <div class="container">
         <div class="row gy-4">
           <div class="col-lg-4" data-aos="fade-up" data-aos-delay="100">
             <div class="services-list">
-              <a href="#" id="web-development-link" class="active">Desarrollo Web</a>
-              <a href="#">Soporte/soluciones Técnologicas</a>
-              <a href="#">Manejo de Bases de Datos</a>
-              <a href="#">Software de punto de venta</a>
+              <a href="#" class="active" 
+                 data-img="assets/img/1.png"
+                 data-desc="En DevXter combinamos tecnología, diseño y estrategia para ayudarte a evolucionar digitalmente. Nos adaptamos a tu presupuesto y necesidades.">
+                💻 Diseñamos tu página web con impacto.
+              </a>
+              <a href="#" 
+                 data-img="assets/img/social.png"
+                 data-desc="Gestionamos tus redes sociales para que conectes con tu audiencia y multipliques tu impacto digital. Publicamos, analizamos y mejoramos.">
+                📲 Gestionamos tus redes sociales
+              </a>
+              <a href="#" 
+                 data-img="assets/img/foto.png"
+                 data-desc="Creamos contenido visual con calidad profesional para que tu marca luzca como se merece.">
+                📸 Creamos contenido con fotos profesionales.
+              </a>
+              <a href="#" 
+                 data-img="assets/img/estrategia.png"
+                 data-desc="Desarrollamos estrategias digitales a medida para que tu negocio crezca con inteligencia.">
+                🧠 Potenciamos tu marca con estrategia digital.
+              </a>
             </div>
-            <h4>Enim qui eos rerum in delectus</h4>
-            <p>Nam voluptatem quasi numquam quas fugiat ex temporibus quo est. Quia aut quam quod facere ut non 
-              occaecati ut aut. Nesciunt mollitia illum tempore corrupti sed eum reiciendis. Maxime modi rerum.</p>
+            <h4>Impulsa tu presencia digital</h4>
+            <p id="service-description">
+              En DevXter combinamos tecnología, diseño y estrategia para ayudarte a evolucionar digitalmente. Nos adaptamos a tu presupuesto y necesidades.
+            </p>
           </div>
 
           <div class="col-lg-8" data-aos="fade-up" data-aos-delay="200">
-            <!-- Contenedor de la imagen (inicialmente oculto) -->
-            <div id="desarrollo-web-img-container" style="display: none;">
-              <img src="assets/img/1.png" alt="lolo-lograre" class="img-fluid">
-            </div>
-
-            <h3>Temporibus et in vero dicta aut eius lidero plastis trand lined voluptas dolorem ut voluptas</h3>
-            <p>
-              Blanditiis voluptate odit ex error ea sed officiis deserunt. Cupiditate non consequatur et doloremque 
-              consequuntur. Accusantium labore reprehenderit error temporibus saepe perferendis fuga doloribus vero. 
-              Qui omnis quo sit. Dolorem architecto eum et quos deleniti officia qui.
-            </p>
-            <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Aut eum totam accusantium voluptatem.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Assumenda et porro nisi nihil nesciunt voluptatibus.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea</span></li>
-            </ul>
-            <p>
-              Est reprehenderit voluptatem necessitatibus asperiores neque sed ea illo. Deleniti quam sequi optio iste 
-              veniam repellat odit. Aut pariatur itaque nesciunt fuga.
-            </p>
-            <p>
-              Sunt rem odit accusantium omnis perspiciatis officia. Laboriosam aut consequuntur recusandae mollitia 
-              doloremque est architecto cupiditate ullam. Quia est ut occaecati fuga. Distinctio ex repellendus eveniet 
-              velit sint quia sapiente cumque. Et ipsa perferendis ut nihil. Laboriosam vel voluptates tenetur nostrum. 
-              çEaque iusto cupiditate et totam et quia dolorum in. Sunt molestiae ipsum at consequatur vero. 
-              Architecto ut pariatur autem ad non cumque nesciunt qui maxime. Sunt eum quia impedit dolore alias 
-              explicabo ea.
-            </p>
+            <img id="service-image" src="assets/img/1.png" alt="Servicios DevXter" class="img-fluid">
           </div>
         </div>
       </div>
-
-    </section><!-- /Service Details Section -->
-
+    </section>
   </main>
 
   <footer id="footer" class="footer accent-background">
     <div class="container">
-      <div class="copyright text-center ">
-        <p>© <span>Copyright</span> <strong class="px-1 sitename">DevFolio</strong> <span>All Rights Reserved</span></p>
+      <div class="copyright text-center">
+        <p>© <strong class="px-1 sitename">DevXter</strong> | Todos los derechos reservados</p>
       </div>
       <div class="social-links d-flex justify-content-center">
-        <a href=""><i class="bi bi-twitter-x"></i></a>
-        <a href=""><i class="bi bi-facebook"></i></a>
-        <a href=""><i class="bi bi-instagram"></i></a>
-        <a href=""><i class="bi bi-linkedin"></i></a>
+        <a href="#"><i class="bi bi-twitter-x"></i></a>
+        <a href="#"><i class="bi bi-facebook"></i></a>
+        <a href="#"><i class="bi bi-instagram"></i></a>
+        <a href="#"><i class="bi bi-linkedin"></i></a>
       </div>
       <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Diseño base por <a href="https://bootstrapmade.com/">BootstrapMade</a>
       </div>
     </div>
   </footer>
 
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+  </a>
 
   <div id="preloader"></div>
 
+  <!-- Scripts -->
   <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="assets/vendor/php-email-form/validate.js"></script>
   <script src="assets/vendor/aos/aos.js"></script>
@@ -156,19 +138,29 @@
   <script src="assets/vendor/imagesloaded/imagesloaded.pkgd.min.js"></script>
   <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
   <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  
-  <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
 
+  <!-- Script personalizado para cambiar contenido dinámicamente -->
   <script>
-    // JavaScript para mostrar la imagen de "Desarrollo Web" al hacer clic
-    document.getElementById('web-development-link').addEventListener('click', function(e) {
-      e.preventDefault(); // Prevenir el comportamiento predeterminado
-      var imgContainer = document.getElementById('desarrollo-web-img-container');
-      imgContainer.style.display = (imgContainer.style.display === 'none' || imgContainer.style.display === '') ? 'block' : 'none';
+    const serviceLinks = document.querySelectorAll('.services-list a');
+    const serviceImage = document.getElementById('service-image');
+    const serviceDescription = document.getElementById('service-description');
+
+    serviceLinks.forEach(link => {
+      link.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        serviceLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+
+        const newImg = this.getAttribute('data-img');
+        const newDesc = this.getAttribute('data-desc');
+
+        serviceImage.src = newImg;
+        serviceDescription.textContent = newDesc;
+      });
     });
   </script>
-
 </body>
 
 </html>
