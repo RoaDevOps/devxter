@@ -180,8 +180,59 @@
     <script src="assets/js/main.js"></script>
 
   <script>
+const API_URL = "https://8cd2d84iii.execute-api.us-east-1.amazonaws.com/prod/lead";
+
 document.getElementById("leadForm").addEventListener("submit", async function(e) {
   e.preventDefault();
 
+  const status = document.getElementById("status");
+  status.innerText = "Enviando mensaje...";
+  status.style.color = "#555";
+
   const formData = new FormData(this);
-  const data 
+
+  const data = {
+    name: formData.get("name"),
+    email: formData.get("email"),
+    subject: formData.get("subject"),
+    message: formData.get("message"),
+    timestamp: new Date().toISOString()
+  };
+
+  // Validación básica
+  if (!data.name || !data.email || !data.message) {
+    status.innerText = "Por favor completa todos los campos obligatorios.";
+    status.style.color = "red";
+    return;
+  }
+
+  try {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+
+    if (!response.ok) {
+      throw new Error("Error en la respuesta del servidor");
+    }
+
+    const result = await response.json();
+
+    status.innerText = "Mensaje enviado correctamente. Te contactaremos pronto.";
+    status.style.color = "green";
+    this.reset();
+
+    console.log("Respuesta API:", result);
+
+  } catch (error) {
+    console.error("Error:", error);
+    status.innerText = "Hubo un problema al enviar el mensaje. Intenta más tarde.";
+    status.style.color = "red";
+  }
+});
+</script>
+</body>
+</html>
