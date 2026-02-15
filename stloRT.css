@@ -1,0 +1,55 @@
+body {
+  background-color: #242323;
+  color: rgb(247, 243, 243);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #cfcfcf;
+  margin-top: 20px;
+}
+
+.card-form {
+  background: #111;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+input, textarea {
+  background: #dad2d2 !important;
+  border: none !important;
+  color: rgb(20, 19, 19) !important;
+}
+
+button {
+  background: #00c2ff;
+  border: none;
+  font-weight: bold;
+}
+
+button:hover {
+  background: #00a6db;
+}
+
+.brand {
+  font-size: 28px;
+  font-weight: bold;
+  padding: 20px;
+}
+
+.section {
+  padding: 80px 0;
+}
