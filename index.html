@@ -3,14 +3,103 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>R.tech | Cloud & Automatización</title>
+  <title>Roa.tech | Cloud & Automatización</title>
 
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="stloRT.css">
+
+  <style>
+    body{
+      background-color:#0b0b0b;
+      color:#fff;
+    }
+
+    /* Barra superior */
+    .topbar{
+      position:absolute;
+      top:0;
+      left:0;
+      width:100%;
+      padding:18px 40px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      z-index:1000;
+    }
+
+    .brand{
+      font-weight:600;
+      font-size:18px;
+    }
+
+    .top-actions a{
+      margin-left:10px;
+    }
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      margin-top:60px;
+    }
+
+    .title{
+      font-size:42px;
+      font-weight:700;
+    }
+
+    .subtitle{
+      color:#aaa;
+      margin-top:15px;
+    }
+
+    .card-form{
+      background:#161616;
+      padding:30px;
+      border-radius:12px;
+    }
+
+    .form-control{
+      background-color:#1c1c1c;
+      border:1px solid #777;
+      color:#fff;
+    }
+
+    .form-control:focus{
+      background-color:#1c1c1c;
+      color:#fff;
+      border-color:#0d6efd;
+      box-shadow:none;
+    }
+
+    .form-control::placeholder{
+      color:#aaa;
+      opacity:1;
+    }
+
+    .section{
+      padding:80px 0;
+    }
+
+    footer{
+      background:#111;
+    }
+  </style>
 </head>
 <body>
 
-<div class="brand">R.tech | Cloud Engineer</div>
+<!-- Header superior -->
+<div class="topbar">
+  <div class="brand">Roa.tech | Cloud Engineer</div>
+
+  <div class="top-actions">
+    <a href="https://www.linkedin.com/in/TU-USUARIO" target="_blank" class="btn btn-outline-light btn-sm">
+      Ver perfil
+    </a>
+    <a href="cv.pdf" download class="btn btn-primary btn-sm">
+      Descargar CV
+    </a>
+  </div>
+</div>
 
 <section class="hero container">
   <div class="row w-100">
@@ -29,7 +118,9 @@
         Lambda • API Gateway • DynamoDB • Automatización • Escalabilidad
       </p>
 
-      <a href="https://wa.me/526242254030" target="_blank" class="btn btn-primary mt-4" style="font-size:18px;padding:14px 28px;">
+      <a href="https://wa.me/526242254030" target="_blank"
+         class="btn btn-primary mt-4"
+         style="font-size:18px;padding:14px 28px;">
         Quiero automatizar mi negocio
       </a>
     </div>
@@ -42,5 +133,118 @@
         <form id="leadForm">
           <input type="text" name="name" class="form-control mb-3" placeholder="Nombre" required>
           <input type="email" name="email" class="form-control mb-3" placeholder="Correo" required>
-          <input type="text" name="subject" class="fo
+          <input type="text" name="subject" class="form-control mb-3" placeholder="Negocio / Proyecto">
+          <textarea name="message" class="form-control mb-3" rows="4" placeholder="¿Qué proceso quieres automatizar?" required></textarea>
 
+          <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+            Enviar
+          </button>
+        </form>
+
+        <p id="status" class="mt-3 text-center"></p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="section container text-center">
+  <h2>¿Qué puedo automatizar para ti?</h2>
+
+  <div class="row">
+    <div class="col-md-3 mt-4">
+      <p class="text-secondary">Captura automática de clientes desde formularios web</p>
+    </div>
+    <div class="col-md-3 mt-4">
+      <p class="text-secondary">Formularios conectados a bases de datos en la nube</p>
+    </div>
+    <div class="col-md-3 mt-4">
+      <p class="text-secondary">APIs para conectar apps y sistemas</p>
+    </div>
+    <div class="col-md-3 mt-4">
+      <p class="text-secondary">Notificaciones y procesos automáticos</p>
+    </div>
+  </div>
+</section>
+
+<section class="section container text-center">
+  <h2>Soluciones listas para negocio</h2>
+
+  <div class="row">
+    <div class="col-md-4 mt-4">
+      <h5>Automatización para restaurantes</h5>
+      <p class="text-secondary">
+        Sistemas de reservas que guardan clientes automáticamente en la nube.
+      </p>
+    </div>
+
+    <div class="col-md-4 mt-4">
+      <h5>Sistema de leads para inmobiliarias</h5>
+      <p class="text-secondary">
+        Landing pages que almacenan prospectos sin intervención manual.
+      </p>
+    </div>
+
+    <div class="col-md-4 mt-4">
+      <h5>Backend serverless para startups</h5>
+      <p class="text-secondary">
+        APIs listas para conectar aplicaciones web o móviles.
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer class="text-center p-4">
+  <p>Roa.tech © 2026</p>
+  <p class="text-secondary">Cloud & Automatización</p>
+</footer>
+
+<script>
+const API_URL = "https://8cd2d84iii.execute-api.us-east-1.amazonaws.com/prod/lead";
+
+document.getElementById("leadForm").addEventListener("submit", async function(e){
+  e.preventDefault();
+
+  const status = document.getElementById("status");
+  const btn = document.getElementById("submitBtn");
+
+  status.innerText = "Enviando...";
+  status.style.color = "#ccc";
+  btn.disabled = true;
+  btn.innerText = "Enviando...";
+
+  const formData = new FormData(this);
+
+  const data = {
+    name: formData.get("name"),
+    email: formData.get("email"),
+    subject: formData.get("subject"),
+    message: formData.get("message"),
+    timestamp: new Date().toISOString()
+  };
+
+  try{
+    const response = await fetch(API_URL,{
+      method:"POST",
+      headers:{"Content-Type":"application/json"},
+      body:JSON.stringify(data)
+    });
+
+    if(!response.ok) throw new Error();
+
+    status.innerText = "Mensaje enviado. Te contacto pronto.";
+    status.style.color = "lightgreen";
+    this.reset();
+
+  }catch{
+    status.innerText = "Error al enviar. Intenta más tarde.";
+    status.style.color = "red";
+  }
+
+  btn.disabled = false;
+  btn.innerText = "Enviar";
+});
+</script>
+
+</body>
+</html>
