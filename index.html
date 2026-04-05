@@ -1,5 +1,5 @@
-<!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,243 +8,327 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
   <style>
-    body{
-      background-color:#0b0b0b;
-      color:#fff;
+    body {
+      background-color: #0b0b0b;
+      color: #fff;
     }
 
     /* Barra superior */
-    .topbar{
-      position:absolute;
-      top:0;
-      left:0;
-      width:100%;
-      padding:18px 40px;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      z-index:1000;
+    .topbar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 18px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 1000;
     }
 
-    .brand{
-      font-weight:600;
-      font-size:18px;
+    .brand {
+      font-weight: 600;
+      font-size: 18px;
     }
 
-    .top-actions a{
-      margin-left:10px;
+    .top-actions a {
+      margin-left: 10px;
     }
 
-    .hero{
-      min-height:100vh;
-      display:flex;
-      align-items:center;
-      margin-top:60px;
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      margin-top: 60px;
     }
 
-    .title{
-      font-size:42px;
-      font-weight:700;
+    .title {
+      font-size: 42px;
+      font-weight: 700;
     }
 
-    .subtitle{
-      color:#aaa;
-      margin-top:15px;
+    .subtitle {
+      color: #aaa;
+      margin-top: 15px;
     }
 
-    .card-form{
-      background:#161616;
-      padding:30px;
-      border-radius:12px;
+    .card-form {
+      background: #161616;
+      padding: 30px;
+      border-radius: 12px;
     }
 
-    .form-control{
-      background-color:#1c1c1c;
-      border:1px solid #777;
-      color:#fff;
+    .form-control {
+      background-color: #1c1c1c;
+      border: 1px solid #777;
+      color: #fff;
     }
 
-    .form-control:focus{
-      background-color:#1c1c1c;
-      color:#fff;
-      border-color:#0d6efd;
-      box-shadow:none;
+    .form-control:focus {
+      background-color: #1c1c1c;
+      color: #fff;
+      border-color: #6b1a2a;
+      box-shadow: none;
     }
 
-    .form-control::placeholder{
-      color:#aaa;
-      opacity:1;
+    .form-control::placeholder {
+      color: #aaa;
+      opacity: 1;
     }
 
-    .section{
-      padding:80px 0;
+    .section {
+      padding: 80px 0;
     }
 
-    footer{
-      background:#111;
+    footer {
+      background: #111;
+    }
+
+    /* Rojo vino tinto */
+    .btn-primary {
+      background-color: #6b1a2a !important;
+      border-color: #6b1a2a !important;
+    }
+
+    .btn-primary:hover,
+    .btn-primary:focus,
+    .btn-primary:active {
+      background-color: #852034 !important;
+      border-color: #852034 !important;
+    }
+
+    /* Tarjetas de servicios */
+    .service-card {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 12px;
+      padding: 28px 20px;
+      height: 100%;
+      transition: border-color 0.2s;
+    }
+
+    .service-card:hover {
+      border-color: #6b1a2a;
+    }
+
+    .service-icon {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .service-card h6 {
+      color: #fff;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: #aaa;
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    .section-tag {
+      color: #a0392b;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
     }
   </style>
 </head>
+
 <body>
 
-<!-- Header superior -->
-<div class="topbar">
-  <div class="brand">BROTHERS.tech| Cloud Engineer</div>
+  <!-- Header superior -->
+  <div class="topbar">
+    <div class="brand" style="display:flex; align-items:center; gap:8px; font-size:22px;">
+      🌐 BROTHERS.tech | Cloud Engineer
+    </div>
 
-  <div class="top-actions">
-    <a href="https://www.linkedin.com/in/TU-USUARIO" target="_blank" class="btn btn-outline-light btn-sm">
-      Ver perfil
-    </a>
-    <a href="cv.pdf" download class="btn btn-primary btn-sm">
-      Descargar CV
-    </a>
-  </div>
-</div>
-
-<section class="hero container">
-  <div class="row w-100">
-
-    <div class="col-lg-6 d-flex flex-column justify-content-center">
-      <h1 class="title">
-        Automatizo procesos de negocio con AWS para que trabajes menos y escales más
-      </h1>
-
-      <p class="subtitle">
-        Diseño sistemas en AWS que capturan clientes, almacenan datos y automatizan tareas repetitivas
-        para negocios que quieren crecer sin contratar más personal.
-      </p>
-
-      <p class="subtitle">
-        Lambda • API Gateway • DynamoDB • Automatización • Escalabilidad
-      </p>
-
-      <a href="https://wa.me/526242254030" target="_blank"
-         class="btn btn-primary mt-4"
-         style="font-size:18px;padding:14px 28px;">
-        Quiero automatizar mi negocio
+    <div class="top-actions">
+      <a href="https://www.linkedin.com/in/TU-USUARIO" target="_blank" class="btn btn-outline-light btn-sm">
+        Ver perfil
+      </a>
+      <a href="cv.pdf" download class="btn btn-primary btn-sm">
+        Descargar CV
       </a>
     </div>
+  </div>
 
-    <div class="col-lg-6">
-      <div class="card-form">
-        <h4>Describe qué proceso quieres automatizar</h4>
-        <p class="text-secondary">Te respondo en menos de 24 horas con una solución clara</p>
+  <section class="hero container">
+    <div class="row w-100">
 
-        <form id="leadForm">
-          <input type="text" name="name" class="form-control mb-3" placeholder="Nombre" required>
-          <input type="email" name="email" class="form-control mb-3" placeholder="Correo" required>
-          <input type="text" name="subject" class="form-control mb-3" placeholder="Negocio / Proyecto">
-          <textarea name="message" class="form-control mb-3" rows="4" placeholder="¿Qué proceso quieres automatizar?" required></textarea>
+      <div class="col-lg-6 d-flex flex-column justify-content-center">
+        <h1 class="title">
+          Automatizamos procesos de cualquier negocio con AWS para que trabajes menos y tu negocio se vuelva mas
+        </h1>
 
-          <button type="submit" class="btn btn-primary w-100" id="submitBtn">
-            Enviar
-          </button>
-        </form>
+        <p class="subtitle">
+          Diseño sistemas en AWS que capturan clientes, almacenan datos y automatizan tareas repetitivas
+          para negocios que quieren crecer sin contratar más personal.
+        </p>
 
-        <p id="status" class="mt-3 text-center"></p>
+        <p class="subtitle">
+          Lambda • API Gateway • DynamoDB • Automatización • Escalabilidad
+        </p>
+
+        <a href="https://wa.me/526242254030" target="_blank" class="btn btn-primary mt-4"
+          style="font-size:18px;padding:14px 28px;">
+          Quiero automatizar mi negocio
+        </a>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="card-form">
+          <h4>Describe qué proceso quieres automatizar</h4>
+          <p class="text-secondary">Te respondo en menos de 24 horas con una solución clara</p>
+
+          <form id="leadForm">
+            <input type="text" name="name" class="form-control mb-3" placeholder="Nombre" required>
+            <input type="email" name="email" class="form-control mb-3" placeholder="Correo" required>
+            <input type="text" name="subject" class="form-control mb-3" placeholder="Negocio / Proyecto">
+            <textarea name="message" class="form-control mb-3" rows="4" placeholder="¿Qué proceso quieres automatizar?"
+              required></textarea>
+
+            <button type="submit" class="btn btn-primary w-100" id="submitBtn">
+              Enviar
+            </button>
+          </form>
+
+          <p id="status" class="mt-3 text-center"></p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Sección: ¿Qué puedo automatizar? -->
+  <section class="section container text-center">
+    <p class="section-tag">Servicios</p>
+    <h2 style="font-size:36px; font-weight:700; margin-bottom:12px;">¿Qué puedo automatizar para ti?</h2>
+    <p style="color:#aaa; max-width:500px; margin:0 auto 48px;">Soluciones en la nube diseñadas para que tu negocio
+      opere solo.</p>
+
+    <div class="row">
+      <div class="col-md-3 mt-4">
+        <div class="service-card">
+          <div class="service-icon">🎯</div>
+          <h6>Captura de clientes</h6>
+          <p>Captura automática desde formularios web directo a tu base de datos.</p>
+        </div>
+      </div>
+      <div class="col-md-3 mt-4">
+        <div class="service-card">
+          <div class="service-icon">☁️</div>
+          <h6>Bases de datos en la nube</h6>
+          <p>Formularios conectados a DynamoDB sin intervención manual.</p>
+        </div>
+      </div>
+      <div class="col-md-3 mt-4">
+        <div class="service-card">
+          <div class="service-icon">🔗</div>
+          <h6>APIs de integración</h6>
+          <p>Conecta tus apps y sistemas con APIs robustas en AWS.</p>
+        </div>
+      </div>
+      <div class="col-md-3 mt-4">
+        <div class="service-card">
+          <div class="service-icon">⚡</div>
+          <h6>Notificaciones automáticas</h6>
+          <p>Procesos y alertas automáticas sin que tengas que hacer nada.</p>
+        </div>
       </div>
     </div>
+  </section>
 
-  </div>
-</section>
+  <!-- Sección: Soluciones listas -->
+  <section class="section container text-center">
+    <p class="section-tag">Casos de uso</p>
+    <h2 style="font-size:36px; font-weight:700; margin-bottom:12px;">Soluciones listas para negocio</h2>
+    <p style="color:#aaa; max-width:500px; margin:0 auto 48px;">Sistemas probados que puedes implementar hoy mismo.</p>
 
-<section class="section container text-center">
-  <h2>¿Qué puedo automatizar para ti?</h2>
+    <div class="row">
+      <div class="col-md-4 mt-4">
+        <div class="service-card">
+          <div class="service-icon">🍽️</div>
+          <h6>Automatización para restaurantes</h6>
+          <p>Sistemas de reservas que guardan clientes automáticamente en la nube.</p>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col-md-3 mt-4">
-      <p class="text-secondary">Captura automática de clientes desde formularios web</p>
+      <div class="col-md-4 mt-4">
+        <div class="service-card">
+          <div class="service-icon">🏠</div>
+          <h6>Sistema de leads para inmobiliarias</h6>
+          <p>Landing pages que almacenan prospectos sin intervención manual.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 mt-4">
+        <div class="service-card">
+          <div class="service-icon">🚀</div>
+          <h6>Backend serverless para startups</h6>
+          <p>APIs listas para conectar aplicaciones web o móviles.</p>
+        </div>
+      </div>
     </div>
-    <div class="col-md-3 mt-4">
-      <p class="text-secondary">Formularios conectados a bases de datos en la nube</p>
-    </div>
-    <div class="col-md-3 mt-4">
-      <p class="text-secondary">APIs para conectar apps y sistemas</p>
-    </div>
-    <div class="col-md-3 mt-4">
-      <p class="text-secondary">Notificaciones y procesos automáticos</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<section class="section container text-center">
-  <h2>Soluciones listas para negocio</h2>
+  <footer class="text-center p-4">
+    <p>BROTHERS.tech © 2026</p>
+    <p class="text-secondary">Cloud & Automatización</p>
+  </footer>
 
-  <div class="row">
-    <div class="col-md-4 mt-4">
-      <h5>Automatización para restaurantes</h5>
-      <p class="text-secondary">
-        Sistemas de reservas que guardan clientes automáticamente en la nube.
-      </p>
-    </div>
+  <script>
+    const API_URL = "https://8cd2d84iii.execute-api.us-east-1.amazonaws.com/prod/lead";
 
-    <div class="col-md-4 mt-4">
-      <h5>Sistema de leads para inmobiliarias</h5>
-      <p class="text-secondary">
-        Landing pages que almacenan prospectos sin intervención manual.
-      </p>
-    </div>
+    document.getElementById("leadForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
 
-    <div class="col-md-4 mt-4">
-      <h5>Backend serverless para startups</h5>
-      <p class="text-secondary">
-        APIs listas para conectar aplicaciones web o móviles.
-      </p>
-    </div>
-  </div>
-</section>
+      const status = document.getElementById("status");
+      const btn = document.getElementById("submitBtn");
 
-<footer class="text-center p-4">
-  <p>Roa.tech © 2026</p>
-  <p class="text-secondary">Cloud & Automatización</p>
-</footer>
+      status.innerText = "Enviando...";
+      status.style.color = "#ccc";
+      btn.disabled = true;
+      btn.innerText = "Enviando...";
 
-<script>
-const API_URL = "https://8cd2d84iii.execute-api.us-east-1.amazonaws.com/prod/lead";
+      const formData = new FormData(this);
 
-document.getElementById("leadForm").addEventListener("submit", async function(e){
-  e.preventDefault();
+      const data = {
+        name: formData.get("name"),
+        email: formData.get("email"),
+        subject: formData.get("subject"),
+        message: formData.get("message"),
+        timestamp: new Date().toISOString()
+      };
 
-  const status = document.getElementById("status");
-  const btn = document.getElementById("submitBtn");
+      try {
+        const response = await fetch(API_URL, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(data)
+        });
 
-  status.innerText = "Enviando...";
-  status.style.color = "#ccc";
-  btn.disabled = true;
-  btn.innerText = "Enviando...";
+        if (!response.ok) throw new Error();
 
-  const formData = new FormData(this);
+        status.innerText = "Mensaje enviado. Te contacto pronto.";
+        status.style.color = "lightgreen";
+        this.reset();
 
-  const data = {
-    name: formData.get("name"),
-    email: formData.get("email"),
-    subject: formData.get("subject"),
-    message: formData.get("message"),
-    timestamp: new Date().toISOString()
-  };
+      } catch {
+        status.innerText = "Error al enviar. Intenta más tarde.";
+        status.style.color = "red";
+      }
 
-  try{
-    const response = await fetch(API_URL,{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify(data)
+      btn.disabled = false;
+      btn.innerText = "Enviar";
     });
-
-    if(!response.ok) throw new Error();
-
-    status.innerText = "Mensaje enviado. Te contacto pronto.";
-    status.style.color = "lightgreen";
-    this.reset();
-
-  }catch{
-    status.innerText = "Error al enviar. Intenta más tarde.";
-    status.style.color = "red";
-  }
-
-  btn.disabled = false;
-  btn.innerText = "Enviar";
-});
-</script>
+  </script>
 
 </body>
+
 </html>
