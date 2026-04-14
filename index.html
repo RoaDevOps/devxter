@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>BROTHERS.tech | Tu página web, lista para crecer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap"
+    rel="stylesheet">
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --black:   #080808;
-      --offblack: #111111;
-      --card:    #141414;
-      --border:  #222222;
-      --wine:    #7a1e2e;
-      --wine-lit:#9b2438;
-      --text:    #e8e2d9;
-      --muted:   #888880;
-      --accent:  #c8a97e;   /* warm gold */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    html { scroll-behavior: smooth; }
+    :root {
+      --black: #080808;
+      --offblack: #111111;
+      --card: #141414;
+      --border: #222222;
+      --wine: #7a1e2e;
+      --wine-lit: #9b2438;
+      --text: #e8e2d9;
+      --muted: #888880;
+      --accent: #c8a97e;
+      /* warm gold */
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
 
     body {
       background: var(--black);
@@ -48,16 +60,22 @@
     /* ── NAV ── */
     nav {
       position: fixed;
-      top: 0; left: 0; right: 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 22px 48px;
-      background: linear-gradient(to bottom, rgba(8,8,8,.95) 0%, transparent 100%);
+      background: linear-gradient(to bottom, rgba(8, 8, 8, .95) 0%, transparent 100%);
       transition: background .4s;
     }
-    nav.scrolled { background: rgba(8,8,8,.97); border-bottom: 1px solid var(--border); }
+
+    nav.scrolled {
+      background: rgba(8, 8, 8, .97);
+      border-bottom: 1px solid var(--border);
+    }
 
     .brand {
       font-family: 'Playfair Display', serif;
@@ -67,9 +85,16 @@
       color: var(--text);
       text-decoration: none;
     }
-    .brand span { color: var(--accent); }
 
-    .nav-actions { display: flex; gap: 12px; align-items: center; }
+    .brand span {
+      color: var(--accent);
+    }
+
+    .nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
 
     .btn-ghost {
       border: 1px solid var(--border);
@@ -84,7 +109,11 @@
       transition: border-color .2s, color .2s;
       letter-spacing: .3px;
     }
-    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .btn-ghost:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
 
     .btn-primary {
       background: var(--wine);
@@ -99,7 +128,11 @@
       transition: background .2s;
       letter-spacing: .3px;
     }
-    .btn-primary:hover { background: var(--wine-lit); border-color: var(--wine-lit); }
+
+    .btn-primary:hover {
+      background: var(--wine-lit);
+      border-color: var(--wine-lit);
+    }
 
     /* ── HERO ── */
     .hero {
@@ -115,9 +148,11 @@
     .hero::after {
       content: '';
       position: absolute;
-      top: -10%; left: 55%;
-      width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(122,30,46,.18) 0%, transparent 70%);
+      top: -10%;
+      left: 55%;
+      width: 700px;
+      height: 700px;
+      background: radial-gradient(circle, rgba(122, 30, 46, .18) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -127,9 +162,19 @@
       width: 100%;
       text-align: center;
     }
-    .hero-eyebrow { justify-content: center; }
-    .hero-sub { margin-left: auto; margin-right: auto; }
-    .hero-cta { justify-content: center; }
+
+    .hero-eyebrow {
+      justify-content: center;
+    }
+
+    .hero-sub {
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      justify-content: center;
+    }
 
     .hero-eyebrow {
       font-size: 11px;
@@ -141,10 +186,12 @@
       align-items: center;
       gap: 10px;
     }
+
     .hero-eyebrow::before {
       content: '';
       display: inline-block;
-      width: 32px; height: 1px;
+      width: 32px;
+      height: 1px;
       background: var(--accent);
     }
 
@@ -156,6 +203,7 @@
       color: #fff;
       margin-bottom: 28px;
     }
+
     .hero h1 em {
       font-style: italic;
       color: var(--accent);
@@ -192,7 +240,11 @@
       align-items: center;
       gap: 8px;
     }
-    .btn-cta:hover { background: var(--wine-lit); transform: translateY(-2px); }
+
+    .btn-cta:hover {
+      background: var(--wine-lit);
+      transform: translateY(-2px);
+    }
 
     .hero-note {
       color: var(--muted);
@@ -209,6 +261,7 @@
       z-index: 1;
       max-width: 340px;
     }
+
     .form-card-title {
       font-size: 14px;
       font-weight: 500;
@@ -217,7 +270,11 @@
       letter-spacing: .2px;
     }
 
-    .field-wrap { margin-bottom: 10px; position: relative; }
+    .field-wrap {
+      margin-bottom: 10px;
+      position: relative;
+    }
+
     .field-input {
       width: 100%;
       background: #0e0e0e;
@@ -230,8 +287,14 @@
       transition: border-color .2s;
       outline: none;
     }
-    .field-input::placeholder { color: #444; }
-    .field-input:focus { border-color: var(--wine); }
+
+    .field-input::placeholder {
+      color: #444;
+    }
+
+    .field-input:focus {
+      border-color: var(--wine);
+    }
 
     .btn-submit {
       width: 100%;
@@ -247,8 +310,15 @@
       margin-top: 4px;
       transition: background .2s;
     }
-    .btn-submit:hover { background: var(--wine-lit); }
-    .btn-submit:disabled { opacity: .5; cursor: not-allowed; }
+
+    .btn-submit:hover {
+      background: var(--wine-lit);
+    }
+
+    .btn-submit:disabled {
+      opacity: .5;
+      cursor: not-allowed;
+    }
 
     #status {
       margin-top: 12px;
@@ -285,7 +355,14 @@
       align-items: center;
       gap: 10px;
     }
-    .story-tag::before { content:''; display:inline-block; width:32px; height:1px; background:var(--accent); }
+
+    .story-tag::before {
+      content: '';
+      display: inline-block;
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+    }
 
     .story h2 {
       font-family: 'Playfair Display', serif;
@@ -295,7 +372,11 @@
       line-height: 1.15;
       margin-bottom: 20px;
     }
-    .story h2 em { font-style: italic; color: var(--accent); }
+
+    .story h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
 
     .story p {
       color: var(--muted);
@@ -313,11 +394,13 @@
       border-radius: 8px;
       overflow: hidden;
     }
+
     .stat-box {
       background: var(--card);
       padding: 20px 18px;
       text-align: center;
     }
+
     .stat-number {
       font-family: 'Playfair Display', serif;
       font-size: 32px;
@@ -326,7 +409,11 @@
       line-height: 1;
       margin-bottom: 6px;
     }
-    .stat-number span { color: var(--accent); }
+
+    .stat-number span {
+      color: var(--accent);
+    }
+
     .stat-label {
       font-size: 12px;
       color: var(--muted);
@@ -340,9 +427,17 @@
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
-    .services-inner { max-width: 1100px; margin: 0 auto; }
 
-    .section-head { text-align: center; margin-bottom: 36px; }
+    .services-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-head {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
     .section-tag {
       font-size: 11px;
       letter-spacing: 3px;
@@ -351,12 +446,14 @@
       margin-bottom: 14px;
       display: inline-block;
     }
+
     .section-head h2 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(28px, 3vw, 42px);
       color: #fff;
       font-weight: 700;
     }
+
     .section-head p {
       color: var(--muted);
       margin-top: 12px;
@@ -395,10 +492,11 @@
       margin-bottom: 14px;
       transition: border-color .25s, transform .25s, box-shadow .25s;
     }
+
     .svc-card:hover .svc-circle {
       border-color: var(--wine);
       transform: translateY(-4px);
-      box-shadow: 0 8px 28px rgba(122,30,46,.25);
+      box-shadow: 0 8px 28px rgba(122, 30, 46, .25);
     }
 
     .svc-card h3 {
@@ -408,6 +506,7 @@
       font-weight: 500;
       letter-spacing: .2px;
     }
+
     .svc-card p {
       color: var(--muted);
       font-size: 12px;
@@ -436,6 +535,7 @@
       line-height: 1.2;
       margin-bottom: 16px;
     }
+
     .cloud-grid p {
       color: var(--muted);
       font-size: 15px;
@@ -449,6 +549,7 @@
       gap: 8px;
       margin-top: 20px;
     }
+
     .pill {
       background: #111;
       border: 1px solid var(--border);
@@ -468,18 +569,30 @@
       border-radius: 10px;
       overflow: hidden;
     }
+
     .cf-item {
       background: var(--card);
       padding: 18px 20px;
     }
-    .cf-item .cf-icon { font-size: 22px; margin-bottom: 10px; display: block; }
+
+    .cf-item .cf-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
     .cf-item h4 {
       font-size: 14px;
       color: #fff;
       font-weight: 500;
       margin-bottom: 6px;
     }
-    .cf-item p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    .cf-item p {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
 
     /* ── FOOTER ── */
     footer {
@@ -488,39 +601,66 @@
       padding: 48px;
       text-align: center;
     }
+
     footer .footer-brand {
       font-family: 'Playfair Display', serif;
       font-size: 22px;
       color: #fff;
       margin-bottom: 8px;
     }
-    footer .footer-brand span { color: var(--accent); }
-    footer p { color: var(--muted); font-size: 13px; margin-top: 4px; }
-    .footer-links { display: flex; justify-content: center; gap: 24px; margin: 20px 0; }
+
+    footer .footer-brand span {
+      color: var(--accent);
+    }
+
+    footer p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin: 20px 0;
+    }
+
     .footer-links a {
       color: var(--muted);
       text-decoration: none;
       font-size: 13px;
       transition: color .2s;
     }
-    .footer-links a:hover { color: var(--accent); }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
 
     /* ── WA FLOAT ── */
     .wa-float {
       position: fixed;
-      bottom: 28px; right: 28px;
+      bottom: 28px;
+      right: 28px;
       background: #25d366;
       color: #fff;
-      width: 54px; height: 54px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       font-size: 26px;
       text-decoration: none;
-      box-shadow: 0 4px 20px rgba(37,211,102,.35);
+      box-shadow: 0 4px 20px rgba(37, 211, 102, .35);
       z-index: 200;
       transition: transform .2s, box-shadow .2s;
     }
-    .wa-float:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(37,211,102,.5); }
+
+    .wa-float:hover {
+      transform: scale(1.08);
+      box-shadow: 0 6px 28px rgba(37, 211, 102, .5);
+    }
 
     /* ── ANIMATIONS ── */
     .fade-up {
@@ -528,29 +668,75 @@
       transform: translateY(30px);
       transition: opacity .7s ease, transform .7s ease;
     }
-    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
 
     /* ── RESPONSIVE ── */
     @media (max-width: 900px) {
-      nav { padding: 18px 24px; }
-      .hero { padding: 100px 24px 60px; }
-      .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-      .hero h1 { font-size: 38px; }
-      .story { grid-template-columns: 1fr; gap: 32px; padding: 50px 24px; }
-      .services-wrap { padding: 50px 24px; }
-      .services-grid { grid-template-columns: 1fr; }
-      .cloud-wrap { padding: 50px 24px; }
-      .cloud-grid { grid-template-columns: 1fr; gap: 40px; }
-      footer { padding: 40px 24px; }
-      .nav-actions .btn-ghost { display: none; }
+      nav {
+        padding: 18px 24px;
+      }
+
+      .hero {
+        padding: 100px 24px 60px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
+      }
+
+      .hero h1 {
+        font-size: 38px;
+      }
+
+      .story {
+        grid-template-columns: 1fr;
+        gap: 32px;
+        padding: 50px 24px;
+      }
+
+      .services-wrap {
+        padding: 50px 24px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .cloud-wrap {
+        padding: 50px 24px;
+      }
+
+      .cloud-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      footer {
+        padding: 40px 24px;
+      }
+
+      .nav-actions .btn-ghost {
+        display: none;
+      }
     }
 
     @media (max-width: 600px) {
-      .story-stats { grid-template-columns: 1fr 1fr; }
-      .cloud-features { grid-template-columns: 1fr; }
+      .story-stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .cloud-features {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAV -->
@@ -571,7 +757,8 @@
           Tu negocio merece una presencia <em>real</em> en internet
         </h1>
         <p class="hero-sub fade-up" style="transition-delay:.2s">
-          Creamos tu página web completa — con dominio <strong style="color:var(--text)">.com, .mx</strong> o el que necesites —
+          Creamos tu página web completa — con dominio <strong style="color:var(--text)">.com, .mx</strong> o el que
+          necesites —
           estable, segura y lista para crecer contigo.
         </p>
         <div class="hero-cta fade-up" style="transition-delay:.3s">
@@ -584,7 +771,7 @@
     </div>
   </section>
 
-  
+
   <hr class="divider">
 
   <!-- SERVICES -->
@@ -678,7 +865,7 @@
   </div>
 
 
-<hr class="divider">
+  <hr class="divider">
 
   <!-- STORY -->
   <div style="max-width:1100px; margin:0 auto;">
@@ -697,24 +884,22 @@
         </p>
       </div>
       <div class="story-stats fade-up" style="transition-delay:.15s">
-        <div class="stat-box">
-          <div class="stat-number">2<span>+</span></div>
-          <div class="stat-label">Años construyendo en la web</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">100<span>%</span></div>
-          <div class="stat-label">Compromiso con cada proyecto</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">.com</div>
-          <div class="stat-label">Dominios incluidos</div>
-        </div>
-        <div class="stat-box">
-          <div class="stat-number">24<span>h</span></div>
-          <div class="stat-label">Tiempo de respuesta</div>
-        </div>
+
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">100<span>%</span></div>
+        <div class="stat-label">Compromiso con cada proyecto</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">.com</div>
+        <div class="stat-label">Dominios incluidos</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-number">24<span>h</span></div>
+        <div class="stat-label">Tiempo de respuesta</div>
       </div>
     </div>
+  </div>
   </div>
 
   <!-- CONTACT FORM -->
@@ -777,10 +962,10 @@
     // Form submit
     const API_URL = "https://8cd2d84iii.execute-api.us-east-1.amazonaws.com/prod/lead";
 
-    document.getElementById("leadForm").addEventListener("submit", async function(e) {
+    document.getElementById("leadForm").addEventListener("submit", async function (e) {
       e.preventDefault();
       const status = document.getElementById("status");
-      const btn    = document.getElementById("submitBtn");
+      const btn = document.getElementById("submitBtn");
 
       status.innerText = "Enviando...";
       status.style.color = "#888";
@@ -789,9 +974,9 @@
 
       const fd = new FormData(this);
       const data = {
-        whatsapp:  fd.get("whatsapp"),
-        email:     fd.get("email"),
-        rubro:     fd.get("rubro"),
+        whatsapp: fd.get("whatsapp"),
+        email: fd.get("email"),
+        rubro: fd.get("rubro"),
         timestamp: new Date().toISOString()
       };
 
@@ -815,4 +1000,5 @@
     });
   </script>
 </body>
+
 </html>
