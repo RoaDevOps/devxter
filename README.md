@@ -46,8 +46,8 @@ Librerías adicionales:
 
 ## 📫 Contacto
 ¿Tienes un negocio que necesita escalar, automatizar o simplemente vender más con tecnología?  
-Escríbenos: [roadevops@gmail.com](mailto:roadevops@gmail.com)  
-WhatsApp: [Tu número aquí]
+Escríbenos: [ochoaponte.r.e@gmail.com](mailto:ochoaponte.r.e@gmail.com)  
+WhatsApp: [5621650710]
 
 ---
 
