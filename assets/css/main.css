@@ -616,8 +616,8 @@
     /* ── FOOTER ── */
     footer {
       background: var(--offblack);
-      border-top: 1px solid var(--border);
-      padding: 48px;
+      border-top: 2px solid var(--border);
+      padding: 10px;
       text-align: center;
     }
 
@@ -634,15 +634,15 @@
 
     footer p {
       color: var(--muted);
-      font-size: 13px;
-      margin-top: 4px;
+      font-size: -50px;
+      margin-top: -4px;
     }
 
     .footer-links {
       display: flex;
       justify-content: center;
       gap: 24px;
-      margin: 20px 0;
+      margin: 1% 0;
     }
 
     .footer-links a {
