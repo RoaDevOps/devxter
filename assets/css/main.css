@@ -532,6 +532,84 @@
       line-height: 1.6;
     }
 
+
+/* ── SERVICES: bloque lineal horizontal ── */
+.services-panel {
+  display: flex;
+  flex-wrap: wrap;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.svc-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1 1 0;
+  min-width: 160px;
+  gap: 12px;
+  padding: 24px 20px;
+  border-right: 1px solid var(--border);
+  transition: background .25s;
+}
+
+.svc-row:last-child {
+  border-right: none;
+}
+
+.svc-row:hover {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.svc-row .svc-circle {
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  border-radius: 20%;
+  background: var(--offblack);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  transition: border-color .25s, transform .25s, box-shadow .25s;
+}
+
+.svc-row:hover .svc-circle {
+  border-color: var(--wine);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(122, 30, 46, .25);
+}
+
+.svc-row .svc-text h3 {
+  font-size: 14px;
+  color: #fff;
+  margin-bottom: 4px;
+  font-weight: 500;
+  letter-spacing: .2px;
+}
+
+.svc-row .svc-text p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .svc-row {
+    flex: 1 1 50%;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .svc-row:last-child {
+    border-bottom: none;
+  }
+}
+
     /* ── CLOUD SECTION (secondary) ── */
     .cloud-wrap {
       padding: 60px 48px;
