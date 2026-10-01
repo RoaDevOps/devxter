@@ -1,299 +1,73 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Devxter | Tu página web, lista para crecer</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#070709">
+  <meta name="description" content="DevXter: estrategia, marketing, desarrollo web y soluciones digitales para negocios en CDMX.">
+  <title>DevXter | Marketing, web y tecnología en CDMX</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap"
-    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/main.css">
-</head></head>
-
+</head>
 <body>
-
-  <!-- NAV -->
-  <nav id="navbar">
-    <a href="#" class="brand"
-      onclick="window.scrollTo({top:0,behavior:'smooth'}); return false;">Dev<span>Xter</span></a>
-    <div class="nav-actions">
-      <a href="https://www.linkedin.com/in/roadevops/" target="_blank" class="btn-ghost">LinkedIn</a>
-      <a href="#contacto" class="btn-primary">Cotizar gratis</a>
-    </div>
+<header class="nav" id="nav">
+  <a class="brand" href="#inicio" aria-label="DevXter inicio"><img src="assets/img/devxter-logo.png" alt="DevXter"><span>DEVXTER</span></a>
+  <nav class="links" id="menu">
+    <a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#nosotros">Nosotros</a><a href="#proceso">Proceso</a><a href="#contacto">Contacto</a>
   </nav>
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner hero-center">
-      <div>
-        <p class="hero-eyebrow fade-up">Páginas web profesionales</p>
-        <h1 class="fade-up" style="transition-delay:.1s">
-          Tu negocio merece una presencia <em>real</em> en internet
-        </h1>
-        <p class="hero-sub fade-up" style="transition-delay:.2s">
-          Creamos tu página web completa — con dominio <strong style="color:var(--text)">.com, .mx</strong> o el que
-          necesites —
-          estable, segura y lista para crecer contigo.
-        </p>
-        <div class="hero-cta fade-up" style="transition-delay:.3s">
-          <a href="https://wa.me/525621650710" target="_blank" class="btn-cta">
-            Quiero mi página web
-          </a>
-          <a href="#contacto" class="btn-ghost" style="padding:15px 28px; font-size:15px;">Cotizar gratis</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <hr class="divider">
-
-  <!-- SERVICES -->
-  <div class="services-wrap">
-    <div class="services-inner">
-      <div class="section-head fade-up">
-        <span class="section-tag">Lo que hacemos</span>
-        <h2>Todo lo que necesita tu página web</h2>
-        <p>Desde el dominio hasta el diseño, nos encargamos de todo.</p>
-      </div>
-
-      <div class="services-panel fade-up">
-        <div class="svc-row">
-          <div class="svc-circle">🌐</div>
-          <div class="svc-text">
-            <h3>Dominio personalizado</h3>
-            <p>.com, .mx, .net o el que necesites</p>
-          </div>
-        </div>
-        <div class="svc-row">
-          <div class="svc-circle">🎨</div>
-          <div class="svc-text">
-            <h3>Diseño a tu medida</h3>
-            <p>Identidad propia para tu negocio</p>
-          </div>
-        </div>
-        <div class="svc-row">
-          <div class="svc-circle">📱</div>
-          <div class="svc-text">
-            <h3>100% responsive</h3>
-            <p>Perfecta en celular, tablet y PC</p>
-          </div>
-        </div>
-        <div class="svc-row">
-          <div class="svc-circle">🔒</div>
-          <div class="svc-text">
-            <h3>Segura con SSL</h3>
-            <p>Certificado incluido desde el día uno</p>
-          </div>
-        </div>
-        <div class="svc-row">
-          <div class="svc-circle">⚡</div>
-          <div class="svc-text">
-            <h3>Rápida y estable</h3>
-            <p>Carga veloz para no perder clientes</p>
-          </div>
-        </div>
-        <div class="svc-row">
-          <div class="svc-circle">🛠</div>
-          <div class="svc-text">
-            <h3>Soporte incluido</h3>
-            <p>Cambios y actualizaciones post-lanzamiento</p>
-          </div>
-        </div>
-      </div>
+  <div class="nav-right"><a class="wa-outline" href="https://wa.me/525621650710" target="_blank" rel="noopener">WhatsApp</a><button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button></div>
+</header>
+<main>
+<section class="hero" id="inicio">
+  <div class="hero-glow"></div>
+  <div class="hero-copy reveal">
+    <p class="eyebrow">AGENCIA DE MARKETING Y TECNOLOGÍA · CDMX</p>
+    <h1>Tu negocio,<br>listo para <em>crecer</em></h1>
+    <p class="lead">Estrategia, diseño y tecnología para convertir tu presencia digital en resultados reales.</p>
+    <div class="actions"><a class="btn primary" href="#contacto">Quiero una asesoría <b>→</b></a><a class="btn secondary" href="#servicios">Ver servicios</a></div>
+    <div class="benefits"><div><b>◎</b><span><strong>Estrategia</strong><small>Un plan claro</small></span></div><div><b>◇</b><span><strong>Ejecución</strong><small>Soluciones a la medida</small></span></div><div><b>✓</b><span><strong>Resultados</strong><small>Enfoque en crecimiento</small></span></div></div>
+  </div>
+  <div class="hero-visual reveal">
+    <div class="city-card">
+      <div class="orb"></div><div class="grid-lines"></div>
+      <div class="visual-title">DEV<span>XTER</span></div>
+      <p>IDEAS · ESTRATEGIA · DISEÑO<br>TECNOLOGÍA · RESULTADOS</p>
+      <div class="float-stack"><span>◉ Redes Sociales</span><span>◎ Página Web</span><span>▥ Publicidad ADS</span><span>◫ Fotografía y Video</span></div>
+      <div class="screen"><i></i><strong>Tu marca<br>en el mundo digital.</strong></div>
     </div>
   </div>
-
-  <!-- CLOUD (secondary) -->
-  <div class="cloud-wrap">
-    <div class="cloud-grid">
-      <div class="fade-up">
-        <p class="story-tag">Adicional</p>
-        <h2>¿Quieres ir más lejos? Cloud & Automatización</h2>
-        <p>
-          Para negocios que ya están creciendo y necesitan más, también diseñamos
-          sistemas en la nube con AWS: bases de datos, APIs, automatizaciones y más.
-        </p>
-        <p style="font-size:14px; color:#555;">
-          Esto es un servicio avanzado, no obligatorio. Tu página web básica no lo necesita.
-        </p>
-        <div class="tech-pills">
-          <span class="pill">AWS Lambda</span>
-          <span class="pill">API Gateway</span>
-          <span class="pill">DynamoDB</span>
-          <span class="pill">Automatización</span>
-          <span class="pill">Serverless</span>
-        </div>
-      </div>
-      <div class="cloud-features fade-up" style="transition-delay:.1s">
-        <div class="cf-item">
-          <span class="cf-icon">🎯</span>
-          <h4>Captura de clientes</h4>
-          <p>Formularios conectados directo a tu base de datos en la nube.</p>
-        </div>
-        <div class="cf-item">
-          <span class="cf-icon">☁️</span>
-          <h4>Base de datos cloud</h4>
-          <p>Almacenamiento seguro y escalable con DynamoDB.</p>
-        </div>
-        <div class="cf-item">
-          <span class="cf-icon">🔗</span>
-          <h4>Integraciones API</span></h4>
-          <p>Conecta tu sitio con tus apps y sistemas actuales.</p>
-        </div>
-        <div class="cf-item">
-          <span class="cf-icon">⚡</span>
-          <h4>Notificaciones auto</h4>
-          <p>Alertas y procesos automáticos sin intervención manual.</p>
-        </div>
-      </div>
-    </div>
+</section>
+<section class="services" id="servicios">
+  <div class="section-title reveal"><div><p class="eyebrow">LO QUE HACEMOS</p><h2>Nuestros <em>servicios</em></h2></div><p>Soluciones digitales para negocios que quieren crecer.</p></div>
+  <div class="cards">
+    <article class="card reveal"><span>▣</span><h3>Páginas Web</h3><p>Sitios profesionales, rápidos, responsive y enfocados en convertir visitas en oportunidades.</p><a href="#contacto">Conocer más →</a></article>
+    <article class="card reveal"><span>♙</span><h3>Redes Sociales</h3><p>Contenido, estrategia y gestión para construir una presencia consistente.</p><a href="#contacto">Conocer más →</a></article>
+    <article class="card reveal"><span>▥</span><h3>Publicidad ADS</h3><p>Campañas digitales pensadas para atraer prospectos y generar conversaciones.</p><a href="#contacto">Conocer más →</a></article>
+    <article class="card reveal"><span>◫</span><h3>Fotografía y Video</h3><p>Contenido visual profesional para presentar mejor tu negocio y tus productos.</p><a href="#contacto">Conocer más →</a></article>
+    <article class="card reveal"><span>⚙</span><h3>Soluciones Digitales</h3><p>Sistemas, automatizaciones, APIs y herramientas a la medida de tu operación.</p><a href="#contacto">Conocer más →</a></article>
   </div>
-
-
-  <hr class="divider">
-
-  <!-- STORY -->
-  <div style="max-width:1100px; margin:0 auto;">
-    <div class="story">
-      <div class="fade-up">
-        <p class="story-tag">Quiénes somos</p>
-        <h2>Dos hermanos que construyen mientras <em>aprenden</em></h2>
-        <p>
-          Somos estudiantes de Ingeniería Informática,que mientras cursamos la carrera
-          usamos ese conocimiento para crear páginas web reales,simples y atractivas para negocios reales.
-        </p>
-        <p>
-          No somos una agencia grande ni una coorporacion de muchos años sim enbargo somos dos personas que se
-          esfuerzan, que cuidan
-          cada proyecto como si fuera el propio, y que entregan resultados honestos,efectivos,y sobretodo funcionales.
-          Cada página que lanzamos también paga nuestros estudios — así que nos importa mucho hacerlo eficientemente.
-        </p>
-      </div>
-      <div class="story-img-wrap fade-up" style="transition-delay:.15s">
-        <img src="assets/img/story-img.webp" alt="Brothers.tech" class="story-img">
-      </div>
-</div>
-    </div>
-  </div>
-  </div> 
-
-  <!-- CONTACT FORM -->
-  <div class="services-wrap" id="contacto">
-    <div class="services-inner" style="max-width:520px;">
-      <div class="section-head fade-up">
-        <span class="section-tag">Contacto</span>
-        <h2>Cotización gratis</h2>
-        <p>Te respondemos en menos de 24 Horas.</p>
-      </div>
-      <div class="form-card fade-up" style="max-width:100%; transition-delay:.1s">
-        <p class="form-card-title">Cuéntanos de tu negocio</p>
-        <form id="leadForm">
-          <div class="field-wrap">
-            <input type="tel" name="whatsapp" class="field-input" placeholder="WhatsApp" required>
-          </div>
-          <div class="field-wrap">
-            <input type="email" name="email" class="field-input" placeholder="Correo" required>
-          </div>
-          <div class="field-wrap">
-            <input type="text" name="rubro" class="field-input" placeholder="¿A qué se dedica tu negocio?" required>
-          </div>
-          <button type="submit" class="btn-submit" id="submitBtn">Enviar —> es gratis</button>
-        </form>
-        <p id="status"></p>
-      </div>
-    </div>
-    <div class="stat-box">
-
-  <div class="stat-item">
-    <div class="stat-number">100<span>%</span></div>
-    <div class="stat-label">Compromiso con cada proyecto</div>
-  </div>
-
-  <div class="stat-item">
-    <div class="stat-number">.com</div>
-    <div class="stat-label">Dominios incluidos</div>
-  </div>
-
-  <div class="stat-item">
-    <div class="stat-number">24<span>h</span></div>
-    <div class="stat-label">Tiempo de respuesta</div>
-  </div>
-  </div>
-
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-brand">Dev<span>Xter</span></div>
-    <div class="footer-links">
-      <a href="https://wa.me/525621650710" target="_blank">WhatsApp</a>
-      <a href="https://www.linkedin.com/in/roadevops/" target="_blank">LinkedIn</a>
-      <a href="" download ></a>
-    </div>
-    <p>© 2026 DevXter — Hecho con esfuerzo desde Méxíco 🇲🇽 por venezolanos </p>
-    <p style="margin-top:6px; color:#333; font-size:12px;">Cloud & Automatización · Diseño Web · Dominios</p>
-  </footer>
-
-  <!-- WhatsApp Float -->
-  <a href="https://wa.me/525621650710" target="_blank" class="wa-float" title="Escríbenos por WhatsApp">
-    💬
-  </a>
-
-  <script>
-    // Nav scroll
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      navbar.classList.toggle('scrolled', window.scrollY > 60);
-    });
-
-    // Fade-up on scroll
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
-
-    // Form submit
-    const API_URL = "https://8cd2d84iii.execute-api.us-east-1.amazonaws.com/prod/lead";
-
-    document.getElementById("leadForm").addEventListener("submit", async function (e) {
-      e.preventDefault();
-      const status = document.getElementById("status");
-      const btn = document.getElementById("submitBtn");
-
-      status.innerText = "Enviando...";
-      status.style.color = "#888";
-      btn.disabled = true;
-      btn.innerText = "Enviando...";
-
-      const fd = new FormData(this);
-      const data = {
-        whatsapp: fd.get("whatsapp"),
-        email: fd.get("email"),
-        rubro: fd.get("rubro"),
-        timestamp: new Date().toISOString()
-      };
-
-      try {
-        const res = await fetch(API_URL, {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data)
-        });
-        if (!res.ok) throw new Error();
-        status.innerText = "✓ Recibido. Te contactamos pronto.";
-        status.style.color = "#6fcf7a";
-        this.reset();
-      } catch {
-        status.innerText = "Error al enviar. Escríbenos por WhatsApp.";
-        status.style.color = "#e07070";
-      }
-
-      btn.disabled = false;
-      btn.innerText = "Enviar — es gratis";
-    });
-  </script>
-</body>
-
-</html>
+</section>
+<section class="about" id="nosotros">
+  <div class="about-copy reveal"><p class="eyebrow">DEVXTER</p><h2>No hacemos marketing bonito.<br><em>Hacemos marketing que vende.</em></h2><p>Combinamos marketing, desarrollo y tecnología para que cada pieza de tu presencia digital tenga una función: comunicar mejor, facilitar el contacto y ayudar a crecer tu negocio.</p><p>Ahora nuestra base de operaciones está en <strong>Ciudad de México</strong>, trabajando con negocios que quieren profesionalizar su presencia digital.</p></div>
+  <div class="about-panel reveal"><div><b>01</b><h3>Analizamos</h3><p>Entendemos tu negocio, cliente y presencia actual.</p></div><div><b>02</b><h3>Construimos</h3><p>Diseñamos la solución que realmente necesitas.</p></div><div><b>03</b><h3>Optimizamos</h3><p>Medimos, ajustamos y buscamos oportunidades de mejora.</p></div></div>
+</section>
+<section class="process" id="proceso">
+  <div class="section-title reveal"><div><p class="eyebrow">NUESTRO PROCESO</p><h2>De una idea a una <em>solución real</em></h2></div></div>
+  <div class="steps"><div class="reveal"><b>01</b><h3>Diagnóstico</h3><p>Revisamos dónde estás y qué está frenando tu presencia digital.</p></div><div class="reveal"><b>02</b><h3>Estrategia</h3><p>Definimos prioridades, canales y una ruta clara de trabajo.</p></div><div class="reveal"><b>03</b><h3>Ejecución</h3><p>Diseñamos, desarrollamos y publicamos la solución.</p></div><div class="reveal"><b>04</b><h3>Mejora</h3><p>Damos seguimiento para que tu ecosistema digital siga evolucionando.</p></div></div>
+</section>
+<section class="contact" id="contacto">
+  <div class="contact-copy reveal"><p class="eyebrow">HABLEMOS</p><h2>Tu siguiente cliente puede estar <em>buscándote ahora.</em></h2><p>Cuéntanos de tu negocio. Revisamos tu caso y te contactamos para conocer qué necesitas.</p><a class="btn secondary" href="https://wa.me/525621650710" target="_blank" rel="noopener">Hablar por WhatsApp</a></div>
+  <form id="leadForm" class="lead-form reveal">
+    <label>WhatsApp<input name="whatsapp" type="tel" placeholder="55 0000 0000" required></label>
+    <label>Correo<input name="email" type="email" placeholder="tu@negocio.com" required></label>
+    <label>¿A qué se dedica tu negocio?<input name="rubro" type="text" placeholder="Restaurante, estética, servicios..." required></label>
+    <button class="btn primary" id="submitBtn" type="submit">Solicitar diagnóstico →</button><p id="status" aria-live="polite"></p>
+  </form>
+</section>
+</main>
+<footer><a class="brand" href="#inicio"><img src="assets/img/devxter-logo.png" alt=""><span>DEVXTER</span></a><p>Marketing · Desarrollo Web · Soluciones Digitales</p><p>CDMX · México</p><small>© 2026 DevXter. Todos los derechos reservados.</small></footer>
+<a class="wa-float" href="https://wa.me/525621650710" target="_blank" rel="noopener" aria-label="WhatsApp">◉</a>
+<script src="assets/js/main.js"></script>
+</body></html>
