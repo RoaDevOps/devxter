@@ -1,7 +1,0 @@
-const nav=document.getElementById('nav'),menu=document.getElementById('menu'),menuBtn=document.getElementById('menuBtn');
-addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>30));
-menuBtn.addEventListener('click',()=>menu.classList.toggle('open'));
-menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>menu.classList.remove('open')));
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.08});document.querySelectorAll('.reveal').forEach(e=>io.observe(e));
-const API_URL='https://8cd2d84iii.execute-api.us-east-1.amazonaws.com/prod/lead';
-document.getElementById('leadForm').addEventListener('submit',async function(e){e.preventDefault();const status=document.getElementById('status'),btn=document.getElementById('submitBtn');status.textContent='Enviando...';btn.disabled=true;btn.textContent='Enviando...';const fd=new FormData(this),data={whatsapp:fd.get('whatsapp'),email:fd.get('email'),rubro:fd.get('rubro'),timestamp:new Date().toISOString()};try{const r=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});if(!r.ok)throw new Error();status.textContent='✓ Recibido. Te contactamos pronto.';status.style.color='#76d391';this.reset()}catch(err){status.textContent='No se pudo enviar. Escríbenos por WhatsApp.';status.style.color='#ff6b7f'}finally{btn.disabled=false;btn.textContent='Solicitar diagnóstico →'}});
