@@ -11,6 +11,14 @@
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+  <!-- Pantalla de Intro con Partículas -->
+  <div class="intro-overlay" id="intro-overlay" aria-hidden="true">
+    <canvas id="intro-canvas"></canvas>
+    <p class="intro-subtitle" id="intro-subtitle">
+      BIENVENIDO A <strong>DEVXTER</strong> · ESTRATEGIA, DISEÑO Y TECNOLOGÍA
+    </p>
+    <button class="intro-skip" id="skipIntroBtn" type="button">Saltar intro →</button>
+  </div>
   <header class="nav" id="nav">
     <a class="brand" href="#inicio" aria-label="DevXter inicio">
       <img src="/img/devxter-logo.png" alt="DevXter" width="52" height="52">
