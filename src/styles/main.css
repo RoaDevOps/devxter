@@ -839,4 +839,157 @@ body.intro-active .app-view {
   color: var(--gold);
 }
 
+/* ==========================================================================
+   8. MEJORAS UI FASE 4: ÍCONOS SVG, SPOTLIGHT EN CARDS Y PARALLAX 3D
+   ========================================================================== */
+.benefits b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 23, 72, 0.1);
+  border: 1px solid rgba(255, 23, 72, 0.25);
+  color: var(--red);
+}
+
+.benefits b svg {
+  width: 22px;
+  height: 22px;
+}
+
+.hero-visual {
+  perspective: 1100px;
+}
+
+.city-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.float-stack span {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 500;
+  transition: border-color 0.25s ease, transform 0.25s ease;
+}
+
+.float-stack span svg {
+  width: 18px;
+  height: 18px;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.float-stack span:hover {
+  border-color: var(--gold);
+}
+
+/* Grid adaptable para evitar tarjetas aplastadas o huérfanas */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  gap: 18px;
+}
+
+.card {
+  position: relative;
+  overflow: hidden;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+}
+
+/* Luz interactiva que sigue al cursor dentro de cada tarjeta */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    360px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 23, 72, 0.12),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 23, 72, 0.09);
+  border: 1px solid rgba(255, 23, 72, 0.24);
+  color: var(--red);
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+}
+
+.card-icon svg {
+  width: 26px;
+  height: 26px;
+}
+
+.card:hover .card-icon {
+  transform: scale(1.08);
+  background: var(--red);
+  color: #fff;
+}
+
+.card a {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.2s ease, color 0.2s ease;
+}
+
+.card:hover a {
+  gap: 12px;
+}
+
+.btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(255, 23, 72, 0.35);
+}
+
+.btn.secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+.wa-float {
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.wa-float:hover {
+  transform: scale(1.08) translateY(-3px);
+  box-shadow: 0 18px 40px rgba(24, 182, 91, 0.4);
+}
+
+/* Campo honeypot invisible para protección anti-bots */
+.hp-field {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* En tablets (2 columnas), la 5ª tarjeta ocupa el ancho completo */
+@media (max-width: 1050px) and (min-width: 651px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cards .card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
 }
