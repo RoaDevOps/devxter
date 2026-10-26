@@ -840,25 +840,29 @@ body.intro-active .app-view {
 }
 
 /* ==========================================================================
-   8. MEJORAS UI FASE 4: ÍCONOS SVG, SPOTLIGHT EN CARDS Y PARALLAX 3D
+   8. MEJORAS UI FASE 4: FOCUS/BLUR EN CARDS, REDES COMPACTAS Y WHATSAPP GLOW
    ========================================================================== */
+
+/* 1. Beneficios del Hero con íconos compactos */
 .benefits b {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: rgba(255, 23, 72, 0.1);
-  border: 1px solid rgba(255, 23, 72, 0.25);
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: rgba(255, 23, 72, 0.12);
+  border: 1px solid rgba(255, 23, 72, 0.28);
   color: var(--red);
+  flex-shrink: 0;
 }
 
 .benefits b svg {
-  width: 22px;
-  height: 22px;
+  width: 20px !important;
+  height: 20px !important;
 }
 
+/* 2. Rediseño limpio de la tarjeta derecha del Hero (.city-card) */
 .hero-visual {
   perspective: 1100px;
 }
@@ -868,29 +872,154 @@ body.intro-active .app-view {
   will-change: transform;
 }
 
-.float-stack span {
+.float-stack {
+  position: absolute;
+  left: 6%;
+  top: 9%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 4;
+}
+
+.float-pill {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-weight: 500;
-  transition: border-color 0.25s ease, transform 0.25s ease;
+  padding: 9px 15px 9px 10px;
+  background: rgba(18, 19, 24, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 40px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
-.float-stack span svg {
-  width: 18px;
-  height: 18px;
+.float-pill .pill-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255, 23, 72, 0.15);
+  border: 1px solid rgba(255, 23, 72, 0.35);
   color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
 }
 
-.float-stack span:hover {
+.float-pill svg {
+  width: 14px !important;
+  height: 14px !important;
+}
+
+.float-pill:hover {
+  transform: translateX(6px) scale(1.03);
   border-color: var(--gold);
+  background: rgba(28, 24, 30, 0.95);
+  box-shadow: 0 10px 28px rgba(233, 198, 108, 0.2);
 }
 
-/* Grid adaptable para evitar tarjetas aplastadas o huérfanas */
+.float-pill:hover .pill-dot {
+  background: var(--red);
+  color: #fff;
+  transform: rotate(-8deg) scale(1.08);
+}
+
+.visual-brand-block {
+  position: absolute;
+  right: 7%;
+  top: 42%;
+  text-align: right;
+  z-index: 3;
+}
+
+.visual-brand-block .visual-title {
+  position: static;
+  font: 800 clamp(28px, 3vw, 40px) Montserrat, sans-serif;
+  letter-spacing: 5px;
+  color: #e7c86e;
+  margin-bottom: 6px;
+}
+
+.visual-brand-block .visual-sub {
+  position: static;
+  margin: 0;
+  color: #d5aa6b;
+  font: 700 11px/1.6 Montserrat, sans-serif;
+  letter-spacing: 1.8px;
+}
+
+.screen {
+  position: absolute;
+  left: 6%;
+  bottom: 8%;
+  width: 52%;
+  height: auto;
+  min-height: 120px;
+  padding: 22px 24px;
+  z-index: 3;
+}
+
+/* Dock minimalista de Redes Sociales en la esquina inferior derecha del Hero */
+.social-dock {
+  position: absolute;
+  right: 7%;
+  bottom: 8%;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  background: rgba(14, 14, 18, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 40px;
+  backdrop-filter: blur(10px);
+  z-index: 4;
+}
+
+.social-dock a,
+.footer-socials a {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid transparent;
+  transition: transform 0.25s ease, color 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+}
+
+.social-dock a svg,
+.footer-socials a svg {
+  width: 15px !important;
+  height: 15px !important;
+}
+
+.social-dock a:hover,
+.footer-socials a:hover {
+  color: #fff;
+  background: var(--red);
+  border-color: var(--gold);
+  transform: translateY(-3px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(255, 23, 72, 0.45);
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* 3. Tarjetas de Nuestros Servicios: Efecto Iluminación + Desenfoque (Blur) de las demás */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 18px;
 }
 
@@ -899,16 +1028,44 @@ body.intro-active .app-view {
   overflow: hidden;
   --mouse-x: 50%;
   --mouse-y: 50%;
+  transition:
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.38s ease,
+    opacity 0.38s ease,
+    border-color 0.35s ease,
+    box-shadow 0.38s ease;
 }
 
-/* Luz interactiva que sigue al cursor dentro de cada tarjeta */
+/* Cuando pasas el cursor sobre el contenedor de tarjetas, las NO activas se ponen borrosas */
+.cards:hover .card:not(:hover),
+.cards.is-hovering .card:not(.is-active-card) {
+  filter: blur(4px) brightness(0.65);
+  opacity: 0.48;
+  transform: scale(0.96);
+}
+
+/* La tarjeta activa bajo el cursor se ilumina, se eleva y resplandece */
+.cards .card:hover,
+.cards .card.is-active-card,
+.card.highlight-pulse {
+  filter: blur(0) brightness(1.08);
+  opacity: 1;
+  transform: translateY(-10px) scale(1.03);
+  border-color: var(--gold);
+  box-shadow:
+    0 22px 50px rgba(0, 0, 0, 0.85),
+    0 0 32px rgba(255, 23, 72, 0.28),
+    inset 0 0 22px rgba(233, 198, 108, 0.12);
+  z-index: 5;
+}
+
 .card::before {
   content: "";
   position: absolute;
   inset: 0;
   background: radial-gradient(
-    360px circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 23, 72, 0.12),
+    320px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 23, 72, 0.18),
     transparent 65%
   );
   opacity: 0;
@@ -920,75 +1077,170 @@ body.intro-active .app-view {
   opacity: 1;
 }
 
-.card-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+.card > .card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 23, 72, 0.09);
-  border: 1px solid rgba(255, 23, 72, 0.24);
+  background: rgba(255, 23, 72, 0.1);
+  border: 1px solid rgba(255, 23, 72, 0.28);
   color: var(--red);
-  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
+  font-size: 0;
+  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.card-icon svg {
-  width: 26px;
-  height: 26px;
+.card > .card-icon svg {
+  width: 24px !important;
+  height: 24px !important;
 }
 
-.card:hover .card-icon {
-  transform: scale(1.08);
-  background: var(--red);
+.card:hover > .card-icon {
+  transform: scale(1.1) rotate(-4deg);
+  background: linear-gradient(135deg, #ff1748, #ff512f);
+  border-color: var(--gold);
   color: #fff;
+  box-shadow: 0 8px 22px rgba(255, 23, 72, 0.45);
 }
 
 .card a {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  transition: gap 0.2s ease, color 0.2s ease;
+  transition: gap 0.25s ease, color 0.25s ease;
 }
 
 .card:hover a {
   gap: 12px;
+  color: #fff;
 }
 
-.btn.primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(255, 23, 72, 0.35);
+/* 4. Botones de WhatsApp "Coquetos" (Navbar, Contacto y Flotante) */
+.wa-outline,
+.wa-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  overflow: hidden;
+  transition:
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease,
+    border-color 0.28s ease,
+    background 0.28s ease,
+    color 0.28s ease;
 }
 
-.btn.secondary:hover {
-  border-color: var(--gold);
-  color: var(--gold);
+.wa-cta {
+  background: rgba(24, 182, 91, 0.12);
+  border: 1px solid #25d366;
+  color: #6df09c;
+}
+
+/* Destello brillante (shimmer) que cruza el botón al pasar el cursor */
+.wa-outline::after,
+.wa-cta::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 65%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: skewX(-22deg);
+  transition: left 0.55s ease;
+}
+
+.wa-outline:hover::after,
+.wa-cta:hover::after {
+  left: 140%;
+}
+
+.wa-outline:hover,
+.wa-cta:hover {
+  transform: translateY(-3px) scale(1.05);
+  background: linear-gradient(90deg, #16a34a, #25d366);
+  border-color: #a7f3d0;
+  color: #ffffff;
+  box-shadow:
+    0 10px 28px rgba(37, 211, 102, 0.45),
+    0 0 18px rgba(233, 198, 108, 0.35);
+}
+
+.wa-outline svg,
+.wa-cta svg {
+  transition: transform 0.3s ease;
+}
+
+.wa-outline:hover svg,
+.wa-cta:hover svg {
+  transform: rotate(-12deg) scale(1.15);
 }
 
 .wa-float {
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.wa-float::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 211, 102, 0.55);
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .wa-float:hover {
-  transform: scale(1.08) translateY(-3px);
-  box-shadow: 0 18px 40px rgba(24, 182, 91, 0.4);
+  transform: translateY(-5px) scale(1.12) rotate(-8deg);
+  background: linear-gradient(135deg, #25d366, #10b981);
+  box-shadow:
+    0 16px 36px rgba(37, 211, 102, 0.55),
+    0 0 24px rgba(37, 211, 102, 0.6);
 }
 
-/* Campo honeypot invisible para protección anti-bots */
+.wa-float:hover::before {
+  opacity: 1;
+  transform: scale(1.14);
+}
+
+/* 5. Ocultación estricta del campo anti-bots para que nunca se vea en el formulario */
+.lead-form input.hp-field,
 .hp-field {
-  position: absolute;
-  left: -9999px;
-  opacity: 0;
-  pointer-events: none;
+  display: none !important;
+  position: absolute !important;
+  left: -9999px !important;
+  width: 0 !important;
+  height: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
-/* En tablets (2 columnas), la 5ª tarjeta ocupa el ancho completo */
 @media (max-width: 1050px) and (min-width: 651px) {
   .cards {
     grid-template-columns: repeat(2, 1fr);
   }
   .cards .card:last-child {
     grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 650px) {
+  .visual-brand-block {
+    top: 46%;
+  }
+  .social-dock {
+    right: 5%;
+    bottom: 6%;
   }
 }
 
