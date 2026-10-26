@@ -9,6 +9,7 @@
   --muted: #aaa7a0;
   --red: #ff1748;
   --gold: #e9c66c;
+  --green: #25d366;
   --line: #29282d;
 }
 
@@ -34,7 +35,7 @@ body::before {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: 
+  background-image:
     linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
   background-size: 55px 55px;
@@ -47,7 +48,7 @@ a {
 }
 
 /* ==========================================================================
-   2. NAVEGACIÓN (NAVBAR)
+   2. NAVEGACIÓN (NAVBAR) Y BOTÓN WHATSAPP COQUETO
    ========================================================================== */
 .nav {
   height: 82px;
@@ -108,11 +109,39 @@ a {
 }
 
 .wa-outline {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
   border: 1px solid var(--gold);
   color: #f3d783;
-  padding: 11px 20px;
+  padding: 11px 22px;
   border-radius: 30px;
   font-weight: 700;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wa-outline svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.wa-outline:hover {
+  background: linear-gradient(135deg, #25d366, #10b981);
+  border-color: #a7f3d0;
+  color: #ffffff;
+  transform: translateY(-3px) scale(1.06);
+  box-shadow:
+    0 0 25px rgba(37, 211, 102, 0.75),
+    0 10px 30px rgba(37, 211, 102, 0.4),
+    0 0 15px rgba(233, 198, 108, 0.4);
+}
+
+.wa-outline:hover svg {
+  transform: rotate(-12deg) scale(1.18);
 }
 
 .menu-btn {
@@ -125,7 +154,7 @@ a {
 }
 
 /* ==========================================================================
-   3. SECCIÓN HERO
+   3. SECCIÓN HERO Y PANEL DERECHO (.city-card) SIN ENCIMAMIENTOS
    ========================================================================== */
 .hero {
   min-height: 760px;
@@ -193,13 +222,13 @@ a {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  gap: 22px;
+  gap: 14px;
   padding: 16px 28px;
   border-radius: 30px;
   font-weight: 700;
   border: 1px solid var(--line);
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .primary {
@@ -208,9 +237,50 @@ a {
   color: white;
 }
 
+.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(255, 23, 72, 0.45);
+}
+
 .secondary {
   background: rgba(8, 8, 10, 0.55);
   border-color: #7c7976;
+}
+
+.secondary:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-2px);
+}
+
+/* Botón Hablar por WhatsApp en sección Contacto */
+.wa-cta {
+  background: rgba(37, 211, 102, 0.12);
+  border: 1px solid #25d366;
+  color: #6df09c;
+  position: relative;
+  overflow: hidden;
+}
+
+.wa-cta svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.wa-cta:hover {
+  background: linear-gradient(135deg, #25d366, #10b981);
+  border-color: #a7f3d0;
+  color: #ffffff;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 0 28px rgba(37, 211, 102, 0.8),
+    0 12px 32px rgba(37, 211, 102, 0.45);
+}
+
+.wa-cta:hover svg {
+  transform: rotate(-12deg) scale(1.18);
 }
 
 .benefits {
@@ -222,12 +292,25 @@ a {
 .benefits > div {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
 }
 
 .benefits b {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(255, 23, 72, 0.12);
+  border: 1px solid rgba(255, 23, 72, 0.28);
   color: var(--red);
-  font-size: 26px;
+  flex-shrink: 0;
+}
+
+.benefits b svg {
+  width: 20px;
+  height: 20px;
 }
 
 .benefits span {
@@ -241,6 +324,7 @@ a {
 
 .hero-visual {
   min-height: 560px;
+  perspective: 1100px;
 }
 
 .city-card {
@@ -250,7 +334,8 @@ a {
   border: 1px solid #2a292d;
   border-radius: 24px;
   overflow: hidden;
-  background: 
+  transform-style: preserve-3d;
+  background:
     radial-gradient(circle at 70% 25%, rgba(238, 131, 41, 0.23), transparent 28%),
     radial-gradient(circle at 15% 55%, rgba(255, 0, 57, 0.23), transparent 25%),
     linear-gradient(145deg, #0e1116, #09090b 55%, #1a0b09);
@@ -260,89 +345,187 @@ a {
 .grid-lines {
   position: absolute;
   inset: 0;
-  background-image: 
+  background-image:
     linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
   background-size: 46px 46px;
   mask-image: linear-gradient(120deg, #000, transparent 80%);
 }
 
+/* Esfera dorada: esquina superior derecha */
 .orb {
   position: absolute;
-  width: 180px;
-  height: 180px;
+  width: 165px;
+  height: 165px;
   border: 2px solid var(--gold);
   border-radius: 50%;
-  right: 9%;
-  top: 12%;
-  box-shadow: 0 0 70px rgba(233, 198, 108, 0.18);
+  right: 8%;
+  top: 9%;
+  box-shadow: 0 0 70px rgba(233, 198, 108, 0.22);
+  pointer-events: none;
+}
+
+/* Cápsulas de servicios en la esquina superior izquierda (1 sola pieza limpia por ítem) */
+.float-stack {
+  position: absolute;
+  left: 6%;
+  top: 9%;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  z-index: 4;
+}
+
+.float-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 11px;
+  padding: 10px 18px 10px 12px;
+  background: rgba(20, 21, 27, 0.86);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--text);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  transition: all 0.25s ease;
+}
+
+.float-pill .pill-dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 23, 72, 0.15);
+  border: 1px solid rgba(255, 23, 72, 0.35);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.float-pill svg {
+  width: 14px;
+  height: 14px;
+}
+
+.float-pill:hover {
+  transform: translateX(7px);
+  border-color: var(--gold);
+  background: rgba(32, 24, 30, 0.96);
+  box-shadow: 0 10px 28px rgba(255, 23, 72, 0.28);
+}
+
+.float-pill:hover .pill-dot {
+  background: var(--red);
+  border-color: var(--red);
+  color: #fff;
+}
+
+/* Bloque DEVXTER + Subtítulo alineado a la derecha al centro */
+.visual-brand-block {
+  position: absolute;
+  right: 8%;
+  top: 45%;
+  text-align: right;
+  z-index: 3;
+  pointer-events: none;
 }
 
 .visual-title {
-  position: absolute;
-  right: 8%;
-  top: 43%;
-  font: 800 42px Montserrat, sans-serif;
+  font: 800 clamp(28px, 3vw, 40px) Montserrat, sans-serif;
   letter-spacing: 6px;
   color: #e7c86e;
+  margin: 0 0 8px 0;
 }
 
 .visual-title span {
   color: #fff;
 }
 
-.city-card > p {
-  position: absolute;
-  right: 9%;
-  top: 51%;
+.visual-sub {
+  margin: 0;
   color: #d5aa6b;
-  font: 700 15px/1.65 Montserrat, sans-serif;
+  font: 700 12px/1.65 Montserrat, sans-serif;
   letter-spacing: 2px;
 }
 
-.float-stack {
-  position: absolute;
-  left: 5%;
-  top: 14%;
-  display: grid;
-  gap: 12px;
-}
-
-.float-stack span {
-  padding: 15px 20px;
-  background: rgba(28, 29, 34, 0.78);
-  border: 1px solid #777;
-  border-radius: 10px;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 10px 30px #0008;
-}
-
+/* Tarjeta inferior izquierda: Tu marca en el mundo digital */
 .screen {
   position: absolute;
-  left: 8%;
+  left: 6%;
   bottom: 8%;
   width: 48%;
-  height: 150px;
+  min-height: 130px;
   border: 1px solid #34343a;
-  border-radius: 14px;
+  border-radius: 16px;
   background: linear-gradient(135deg, #121217, #1c1110);
-  padding: 28px;
+  padding: 24px;
+  z-index: 3;
 }
 
 .screen i {
   display: block;
-  width: 70px;
+  width: 64px;
   height: 4px;
   background: var(--red);
-  margin-bottom: 15px;
+  margin-bottom: 14px;
 }
 
 .screen strong {
-  font: 700 22px Montserrat, sans-serif;
+  font: 700 20px/1.25 Montserrat, sans-serif;
+}
+
+/* Barra de Redes Sociales en la esquina inferior derecha del Hero */
+.social-dock {
+  position: absolute;
+  right: 8%;
+  bottom: 8%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: rgba(16, 16, 22, 0.9);
+  border: 1px solid rgba(233, 198, 108, 0.28);
+  border-radius: 40px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.65);
+  z-index: 5;
+}
+
+.social-dock a,
+.footer-socials a {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e3de;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.social-dock a svg,
+.footer-socials a svg {
+  width: 15px;
+  height: 15px;
+}
+
+.social-dock a:hover,
+.footer-socials a:hover {
+  color: #fff;
+  background: linear-gradient(135deg, #ff1748, #ff512f);
+  border-color: var(--gold);
+  transform: translateY(-4px) scale(1.14);
+  box-shadow: 0 0 20px rgba(255, 23, 72, 0.65);
 }
 
 /* ==========================================================================
-   4. SERVICIOS, NOSOTROS Y PROCESO
+   4. SERVICIOS (CON ILUMINACIÓN Y DESENFOQUE DE LAS DEMÁS TARJETAS)
    ========================================================================== */
 .services,
 .process {
@@ -369,47 +552,127 @@ a {
 .cards {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
-  gap: 14px;
+  gap: 16px;
 }
 
 .card {
-  min-height: 300px;
+  min-height: 310px;
   padding: 28px 24px;
   border: 1px solid var(--line);
-  border-radius: 16px;
+  border-radius: 18px;
   background: linear-gradient(145deg, #111116, #09090c);
   display: flex;
   flex-direction: column;
-  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+  --mouse-x: 50%;
+  --mouse-y: 50%;
+  transition:
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.38s ease,
+    opacity 0.38s ease,
+    border-color 0.35s ease,
+    box-shadow 0.38s ease,
+    background 0.38s ease;
 }
 
-.card:hover {
-  transform: translateY(-6px);
-  border-color: #554f3a;
+/* Cuando el cursor entra a cualquier tarjeta, TODAS las demás se ponen borrosas */
+.cards:hover .card:not(:hover),
+.cards.is-hovering .card:not(.is-active-card) {
+  filter: blur(4.5px) brightness(0.5);
+  opacity: 0.42;
+  transform: scale(0.95);
 }
 
-.card > span {
-  font-size: 34px;
+/* La tarjeta bajo el cursor se ilumina intensamente */
+.cards .card:hover,
+.cards .card.is-active-card {
+  filter: blur(0px) brightness(1.1);
+  opacity: 1;
+  transform: translateY(-10px) scale(1.03);
+  border-color: var(--gold);
+  background: linear-gradient(145deg, #1b1218, #0d0b10);
+  box-shadow:
+    0 24px 55px rgba(0, 0, 0, 0.9),
+    0 0 35px rgba(255, 23, 72, 0.4),
+    0 0 18px rgba(233, 198, 108, 0.3),
+    inset 0 0 25px rgba(255, 23, 72, 0.14);
+  z-index: 10;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    300px circle at var(--mouse-x) var(--mouse-y),
+    rgba(255, 23, 72, 0.22),
+    transparent 65%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 23, 72, 0.12);
+  border: 1px solid rgba(255, 23, 72, 0.28);
   color: var(--red);
+  transition: all 0.3s ease;
+}
+
+.card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card:hover .card-icon {
+  transform: scale(1.1) rotate(-5deg);
+  background: linear-gradient(135deg, #ff1748, #ff512f);
+  border-color: var(--gold);
+  color: #fff;
+  box-shadow: 0 8px 22px rgba(255, 23, 72, 0.5);
 }
 
 .card h3 {
   font: 700 20px Montserrat, sans-serif;
-  margin: 42px 0 12px;
+  margin: 34px 0 12px;
 }
 
 .card p {
   color: var(--muted);
   line-height: 1.55;
-  margin: 0;
+  margin: 0 0 20px;
 }
 
 .card a {
   color: var(--gold);
   margin-top: auto;
   font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap 0.25s ease, color 0.25s ease;
 }
 
+.card:hover a {
+  gap: 12px;
+  color: #fff;
+}
+
+/* ==========================================================================
+   5. NOSOTROS, PROCESO, CONTACTO Y FOOTER
+   ========================================================================== */
 .about {
   padding: 110px 6vw;
   display: grid;
@@ -490,9 +753,6 @@ a {
   line-height: 1.6;
 }
 
-/* ==========================================================================
-   5. CONTACTO Y FOOTER
-   ========================================================================== */
 .contact {
   margin: 60px 6vw 90px;
   padding: 70px;
@@ -501,7 +761,7 @@ a {
   gap: 70px;
   border: 1px solid #3b3026;
   border-radius: 28px;
-  background: 
+  background:
     radial-gradient(circle at 0 100%, rgba(255, 0, 57, 0.2), transparent 30%),
     linear-gradient(135deg, #111014, #09090b);
 }
@@ -544,6 +804,11 @@ a {
   border-color: var(--gold);
 }
 
+.lead-form input.hp-field,
+.hp-field {
+  display: none !important;
+}
+
 #status {
   min-height: 20px;
   margin: 0;
@@ -558,6 +823,12 @@ footer {
   align-items: center;
   gap: 35px;
   color: var(--muted);
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 footer small {
@@ -576,8 +847,16 @@ footer small {
   place-items: center;
   background: #18b65b;
   color: #fff;
-  font-size: 28px;
   box-shadow: 0 15px 35px #000;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.wa-float:hover {
+  transform: translateY(-5px) scale(1.12) rotate(-8deg);
+  background: linear-gradient(135deg, #25d366, #10b981);
+  box-shadow:
+    0 0 28px rgba(37, 211, 102, 0.85),
+    0 15px 35px rgba(37, 211, 102, 0.5);
 }
 
 .reveal {
@@ -592,8 +871,24 @@ footer small {
 }
 
 /* ==========================================================================
-   6. MEDIA QUERIES (RESPONSIVE)
+   6. SISTEMA DE VISTA DE INTRO
    ========================================================================== */
+body.intro-active {
+  overflow: hidden !important;
+}
+
+/* ==========================================================================
+   7. MEDIA QUERIES (RESPONSIVE)
+   ========================================================================== */
+@media (max-width: 1150px) {
+  .cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .cards .card:last-child {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 1050px) {
   .links {
     display: none;
@@ -620,10 +915,7 @@ footer small {
   }
   .hero-visual,
   .city-card {
-    min-height: 480px;
-  }
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
+    min-height: 490px;
   }
   .about,
   .contact {
@@ -683,36 +975,49 @@ footer small {
   }
   .hero-visual,
   .city-card {
-    min-height: 430px;
+    min-height: 460px;
   }
   .orb {
-    width: 120px;
-    height: 120px;
-  }
-  .visual-title {
-    font-size: 27px;
-    top: 47%;
-  }
-  .city-card > p {
-    font-size: 10px;
-    top: 55%;
+    width: 115px;
+    height: 115px;
   }
   .float-stack {
-    top: 8%;
+    top: 6%;
     left: 5%;
     gap: 8px;
   }
-  .float-stack span {
+  .float-pill {
+    padding: 8px 12px 8px 9px;
     font-size: 12px;
-    padding: 10px 12px;
+  }
+  .visual-brand-block {
+    top: 44%;
+    right: 6%;
+  }
+  .visual-title {
+    font-size: 25px;
+  }
+  .visual-sub {
+    font-size: 10px;
   }
   .screen {
-    width: 58%;
-    height: 110px;
-    padding: 18px;
+    width: 54%;
+    min-height: 105px;
+    padding: 16px;
+    bottom: 7%;
   }
   .screen strong {
-    font-size: 16px;
+    font-size: 15px;
+  }
+  .social-dock {
+    right: 5%;
+    bottom: 7%;
+    padding: 6px 9px;
+    gap: 6px;
+  }
+  .social-dock a {
+    width: 28px;
+    height: 28px;
   }
   .services,
   .process {
@@ -762,486 +1067,4 @@ footer small {
     right: 18px;
     bottom: 18px;
   }
-
-/* ==========================================================================
-   7. SISTEMA DE DOBLE VISTA: PANTALLA DE PARTÍCULAS VS SITIO PRINCIPAL
-   ========================================================================== */
-body.intro-active {
-  overflow: hidden !important;
-}
-
-/* Ocultamos visualmente el sitio durante la intro sin colapsar su geometría */
-body.intro-active .app-view {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.app-view {
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.8s ease;
-}
-
-.intro-overlay {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 99999 !important;
-  background: var(--bg);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  user-select: none;
-  opacity: 1;
-  visibility: visible;
-}
-
-.intro-overlay.is-hidden {
-  display: none !important;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-#intro-canvas {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-}
-
-.intro-subtitle {
-  position: absolute;
-  bottom: 14vh;
-  left: 0;
-  right: 0;
-  z-index: 2;
-  margin: 0;
-  font: 600 clamp(11px, 1.4vw, 14px) Montserrat, sans-serif;
-  letter-spacing: 5px;
-  color: var(--muted);
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(16px);
-  pointer-events: none;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.intro-subtitle strong {
-  color: var(--gold);
-}
-
-/* ==========================================================================
-   8. MEJORAS UI FASE 4: FOCUS/BLUR EN CARDS, REDES COMPACTAS Y WHATSAPP GLOW
-   ========================================================================== */
-
-/* 1. Beneficios del Hero con íconos compactos */
-.benefits b {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
-  background: rgba(255, 23, 72, 0.12);
-  border: 1px solid rgba(255, 23, 72, 0.28);
-  color: var(--red);
-  flex-shrink: 0;
-}
-
-.benefits b svg {
-  width: 20px !important;
-  height: 20px !important;
-}
-
-/* 2. Rediseño limpio de la tarjeta derecha del Hero (.city-card) */
-.hero-visual {
-  perspective: 1100px;
-}
-
-.city-card {
-  transform-style: preserve-3d;
-  will-change: transform;
-}
-
-.float-stack {
-  position: absolute;
-  left: 6%;
-  top: 9%;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  z-index: 4;
-}
-
-.float-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 9px 15px 9px 10px;
-  background: rgba(18, 19, 24, 0.82);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 40px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--text);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
-  transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-}
-
-.float-pill .pill-dot {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: rgba(255, 23, 72, 0.15);
-  border: 1px solid rgba(255, 23, 72, 0.35);
-  color: var(--gold);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  transition: background 0.25s ease, color 0.25s ease, transform 0.25s ease;
-}
-
-.float-pill svg {
-  width: 14px !important;
-  height: 14px !important;
-}
-
-.float-pill:hover {
-  transform: translateX(6px) scale(1.03);
-  border-color: var(--gold);
-  background: rgba(28, 24, 30, 0.95);
-  box-shadow: 0 10px 28px rgba(233, 198, 108, 0.2);
-}
-
-.float-pill:hover .pill-dot {
-  background: var(--red);
-  color: #fff;
-  transform: rotate(-8deg) scale(1.08);
-}
-
-.visual-brand-block {
-  position: absolute;
-  right: 7%;
-  top: 42%;
-  text-align: right;
-  z-index: 3;
-}
-
-.visual-brand-block .visual-title {
-  position: static;
-  font: 800 clamp(28px, 3vw, 40px) Montserrat, sans-serif;
-  letter-spacing: 5px;
-  color: #e7c86e;
-  margin-bottom: 6px;
-}
-
-.visual-brand-block .visual-sub {
-  position: static;
-  margin: 0;
-  color: #d5aa6b;
-  font: 700 11px/1.6 Montserrat, sans-serif;
-  letter-spacing: 1.8px;
-}
-
-.screen {
-  position: absolute;
-  left: 6%;
-  bottom: 8%;
-  width: 52%;
-  height: auto;
-  min-height: 120px;
-  padding: 22px 24px;
-  z-index: 3;
-}
-
-/* Dock minimalista de Redes Sociales en la esquina inferior derecha del Hero */
-.social-dock {
-  position: absolute;
-  right: 7%;
-  bottom: 8%;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 7px 10px;
-  background: rgba(14, 14, 18, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 40px;
-  backdrop-filter: blur(10px);
-  z-index: 4;
-}
-
-.social-dock a,
-.footer-socials a {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--muted);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid transparent;
-  transition: transform 0.25s ease, color 0.25s ease, border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-}
-
-.social-dock a svg,
-.footer-socials a svg {
-  width: 15px !important;
-  height: 15px !important;
-}
-
-.social-dock a:hover,
-.footer-socials a:hover {
-  color: #fff;
-  background: var(--red);
-  border-color: var(--gold);
-  transform: translateY(-3px) scale(1.1);
-  box-shadow: 0 8px 20px rgba(255, 23, 72, 0.45);
-}
-
-.footer-socials {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-/* 3. Tarjetas de Nuestros Servicios: Efecto Iluminación + Desenfoque (Blur) de las demás */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 18px;
-}
-
-.card {
-  position: relative;
-  overflow: hidden;
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-  transition:
-    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.38s ease,
-    opacity 0.38s ease,
-    border-color 0.35s ease,
-    box-shadow 0.38s ease;
-}
-
-/* Cuando pasas el cursor sobre el contenedor de tarjetas, las NO activas se ponen borrosas */
-.cards:hover .card:not(:hover),
-.cards.is-hovering .card:not(.is-active-card) {
-  filter: blur(4px) brightness(0.65);
-  opacity: 0.48;
-  transform: scale(0.96);
-}
-
-/* La tarjeta activa bajo el cursor se ilumina, se eleva y resplandece */
-.cards .card:hover,
-.cards .card.is-active-card,
-.card.highlight-pulse {
-  filter: blur(0) brightness(1.08);
-  opacity: 1;
-  transform: translateY(-10px) scale(1.03);
-  border-color: var(--gold);
-  box-shadow:
-    0 22px 50px rgba(0, 0, 0, 0.85),
-    0 0 32px rgba(255, 23, 72, 0.28),
-    inset 0 0 22px rgba(233, 198, 108, 0.12);
-  z-index: 5;
-}
-
-.card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    320px circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 23, 72, 0.18),
-    transparent 65%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-}
-
-.card:hover::before {
-  opacity: 1;
-}
-
-.card > .card-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 13px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 23, 72, 0.1);
-  border: 1px solid rgba(255, 23, 72, 0.28);
-  color: var(--red);
-  font-size: 0;
-  transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.card > .card-icon svg {
-  width: 24px !important;
-  height: 24px !important;
-}
-
-.card:hover > .card-icon {
-  transform: scale(1.1) rotate(-4deg);
-  background: linear-gradient(135deg, #ff1748, #ff512f);
-  border-color: var(--gold);
-  color: #fff;
-  box-shadow: 0 8px 22px rgba(255, 23, 72, 0.45);
-}
-
-.card a {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  transition: gap 0.25s ease, color 0.25s ease;
-}
-
-.card:hover a {
-  gap: 12px;
-  color: #fff;
-}
-
-/* 4. Botones de WhatsApp "Coquetos" (Navbar, Contacto y Flotante) */
-.wa-outline,
-.wa-cta {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  gap: 9px;
-  overflow: hidden;
-  transition:
-    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.28s ease,
-    border-color 0.28s ease,
-    background 0.28s ease,
-    color 0.28s ease;
-}
-
-.wa-cta {
-  background: rgba(24, 182, 91, 0.12);
-  border: 1px solid #25d366;
-  color: #6df09c;
-}
-
-/* Destello brillante (shimmer) que cruza el botón al pasar el cursor */
-.wa-outline::after,
-.wa-cta::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: -120%;
-  width: 65%;
-  height: 100%;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.35),
-    transparent
-  );
-  transform: skewX(-22deg);
-  transition: left 0.55s ease;
-}
-
-.wa-outline:hover::after,
-.wa-cta:hover::after {
-  left: 140%;
-}
-
-.wa-outline:hover,
-.wa-cta:hover {
-  transform: translateY(-3px) scale(1.05);
-  background: linear-gradient(90deg, #16a34a, #25d366);
-  border-color: #a7f3d0;
-  color: #ffffff;
-  box-shadow:
-    0 10px 28px rgba(37, 211, 102, 0.45),
-    0 0 18px rgba(233, 198, 108, 0.35);
-}
-
-.wa-outline svg,
-.wa-cta svg {
-  transition: transform 0.3s ease;
-}
-
-.wa-outline:hover svg,
-.wa-cta:hover svg {
-  transform: rotate(-12deg) scale(1.15);
-}
-
-.wa-float {
-  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, background 0.3s ease;
-}
-
-.wa-float::before {
-  content: "";
-  position: absolute;
-  inset: -4px;
-  border-radius: 50%;
-  border: 2px solid rgba(37, 211, 102, 0.55);
-  opacity: 0;
-  transform: scale(0.85);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.wa-float:hover {
-  transform: translateY(-5px) scale(1.12) rotate(-8deg);
-  background: linear-gradient(135deg, #25d366, #10b981);
-  box-shadow:
-    0 16px 36px rgba(37, 211, 102, 0.55),
-    0 0 24px rgba(37, 211, 102, 0.6);
-}
-
-.wa-float:hover::before {
-  opacity: 1;
-  transform: scale(1.14);
-}
-
-/* 5. Ocultación estricta del campo anti-bots para que nunca se vea en el formulario */
-.lead-form input.hp-field,
-.hp-field {
-  display: none !important;
-  position: absolute !important;
-  left: -9999px !important;
-  width: 0 !important;
-  height: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  opacity: 0 !important;
-  pointer-events: none !important;
-}
-
-@media (max-width: 1050px) and (min-width: 651px) {
-  .cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-  .cards .card:last-child {
-    grid-column: 1 / -1;
-  }
-}
-
-@media (max-width: 650px) {
-  .visual-brand-block {
-    top: 46%;
-  }
-  .social-dock {
-    right: 5%;
-    bottom: 6%;
-  }
-}
-
 }

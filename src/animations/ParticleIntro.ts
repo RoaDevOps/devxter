@@ -319,7 +319,7 @@ export class ParticleIntro {
 
   /**
    * Reproduce la pantalla de partículas fija a pantalla completa y al terminar
-   * descubre la página principal en esa misma posición sin necesidad de scroll.
+   * desbloquea el scroll vertical para navegar libremente con la rueda del mouse.
    */
   public async play(): Promise<void> {
     if (this.isPlaying) return;
@@ -334,8 +334,9 @@ export class ParticleIntro {
     window.scrollTo(0, 0);
     document.querySelectorAll('.hero .reveal').forEach((el) => el.classList.add('visible'));
 
-    // Mostramos la pantalla de intro cubriendo el 100% del monitor (incluyendo navbar y botón WhatsApp)
+    // Bloqueamos el scroll únicamente mientras corren las partículas
     this.applyFullscreenStyles();
+    document.body.classList.add('intro-active');
     document.body.style.overflow = 'hidden';
 
     if (this.subtitleEl) {
@@ -382,10 +383,15 @@ export class ParticleIntro {
       4.2
     );
 
-    // ACTO 4 (7.6s a 8.7s): Disolver partículas y revelar la página que ya está detrás en (0,0)
+    // ACTO 4 (7.6s a 8.7s): Disolver partículas y liberar el scroll de la página
     this.timeline.call(
       () => {
         this.triggerSlowDispersion(5.5);
+        document.body.classList.remove('intro-active');
+        document.body.style.overflow = '';
+        document.body.style.overflowY = 'auto';
+        document.documentElement.style.overflow = '';
+        document.documentElement.style.overflowY = 'auto';
         window.scrollTo(0, 0);
         window.dispatchEvent(new CustomEvent('intro:reveal'));
       },
@@ -411,11 +417,14 @@ export class ParticleIntro {
       this.animationFrameId = null;
     }
 
-    // Quitamos por completo el overlay del flujo visual para que no ocupe espacio
+    // Ocultamos el overlay y liberamos al 100% la rueda del mouse
     this.overlay.style.display = 'none';
     this.overlay.style.pointerEvents = 'none';
+    document.body.classList.remove('intro-active');
     document.body.style.overflow = '';
-    window.scrollTo(0, 0);
+    document.body.style.overflowY = 'auto';
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.overflowY = 'auto';
     window.dispatchEvent(new CustomEvent('intro:reveal'));
   }
 }
