@@ -763,13 +763,33 @@ footer small {
     bottom: 18px;
   }
 
-  /* ==========================================================================
-   7. PANTALLA DE INTRODUCCIÓN DE PARTÍCULAS (SPLASH SCREEN)
+/* ==========================================================================
+   7. SISTEMA DE DOBLE VISTA: PANTALLA DE PARTÍCULAS VS SITIO PRINCIPAL
    ========================================================================== */
+body.intro-active {
+  overflow: hidden !important;
+}
+
+/* Ocultamos visualmente el sitio durante la intro sin colapsar su geometría */
+body.intro-active .app-view {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.app-view {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.8s ease;
+}
+
 .intro-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 99999 !important;
   background: var(--bg);
   display: flex;
   flex-direction: column;
@@ -777,26 +797,39 @@ footer small {
   justify-content: center;
   overflow: hidden;
   user-select: none;
+  opacity: 1;
+  visibility: visible;
+}
+
+.intro-overlay.is-hidden {
+  display: none !important;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 #intro-canvas {
   position: absolute;
-  inset: 0;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   display: block;
 }
 
 .intro-subtitle {
-  position: relative;
+  position: absolute;
+  bottom: 14vh;
+  left: 0;
+  right: 0;
   z-index: 2;
-  margin-top: clamp(110px, 18vw, 175px);
-  font: 600 clamp(11px, 1.5vw, 14px) Montserrat, sans-serif;
+  margin: 0;
+  font: 600 clamp(11px, 1.4vw, 14px) Montserrat, sans-serif;
   letter-spacing: 5px;
   color: var(--muted);
   text-transform: uppercase;
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(16px);
   pointer-events: none;
   text-align: center;
   padding: 0 20px;
@@ -804,29 +837,6 @@ footer small {
 
 .intro-subtitle strong {
   color: var(--gold);
-}
-
-.intro-skip {
-  position: absolute;
-  z-index: 3;
-  right: 5vw;
-  bottom: 5vh;
-  background: rgba(14, 14, 18, 0.75);
-  border: 1px solid var(--line);
-  color: var(--muted);
-  padding: 10px 18px;
-  border-radius: 30px;
-  font: 600 12px 'DM Sans', sans-serif;
-  letter-spacing: 1px;
-  cursor: pointer;
-  backdrop-filter: blur(8px);
-  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
-}
-
-.intro-skip:hover {
-  color: var(--text);
-  border-color: var(--gold);
-  transform: translateY(-2px);
 }
 
 }

@@ -34,6 +34,8 @@ export function initNavbarAndScroll(): void {
     });
   }
 
+  const revealElements = document.querySelectorAll<HTMLElement>('.reveal');
+
   const observer = new IntersectionObserver(
     (entries, obs) => {
       entries.forEach((entry) => {
@@ -46,5 +48,19 @@ export function initNavbarAndScroll(): void {
     { threshold: 0.08 }
   );
 
-  document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  revealElements.forEach((el) => observer.observe(el));
+
+  // Fuerza la revelación inmediata de los elementos en el viewport inicial (Hero) sin esperar scroll
+  const revealViewportNow = (): void => {
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    revealElements.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < viewportHeight * 0.95) {
+        el.classList.add('visible');
+        observer.unobserve(el);
+      }
+    });
+  };
+
+  window.addEventListener('intro:reveal', revealViewportNow);
 }
