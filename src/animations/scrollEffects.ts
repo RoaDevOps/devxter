@@ -9,6 +9,7 @@ export function initInteractiveEffects(): void {
   const brandBlock = cityCard?.querySelector<HTMLElement>('.visual-brand-block');
   const servicesGrid = document.getElementById('servicesGrid');
   const serviceCards = Array.from(document.querySelectorAll<HTMLElement>('.cards .card'));
+  const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
   // 1. Movimiento flotante suave en la tarjeta del Hero
   if (orb) {
@@ -22,7 +23,7 @@ export function initInteractiveEffects(): void {
     });
   }
 
-  if (pills && pills.length > 0) {
+  if (pills && pills.length > 0 && isDesktopPointer) {
     gsap.to(pills, {
       y: -4,
       duration: 2.2,
@@ -33,8 +34,8 @@ export function initInteractiveEffects(): void {
     });
   }
 
-  // 2. Parallax 3D en la tarjeta derecha del Hero
-  if (heroVisual && cityCard && window.matchMedia('(pointer: fine)').matches) {
+  // 2. Parallax 3D en la tarjeta derecha del Hero (en escritorio)
+  if (heroVisual && cityCard && isDesktopPointer) {
     heroVisual.addEventListener('mousemove', (e: MouseEvent) => {
       const rect = heroVisual.getBoundingClientRect();
       const relX = (e.clientX - rect.left) / rect.width - 0.5;
@@ -60,7 +61,7 @@ export function initInteractiveEffects(): void {
     });
   }
 
-  // 3. Control instantáneo Focus/Blur en Nuestros Servicios (0ms lag, acelerado por CSS GPU)
+  // 3. Control Focus/Blur en Nuestros Servicios (Mouse en Laptop + Toque/Click en Móvil)
   const setActiveCard = (activeCard: HTMLElement): void => {
     servicesGrid?.classList.add('is-hovering');
     for (const card of serviceCards) {
@@ -78,31 +79,56 @@ export function initInteractiveEffects(): void {
   serviceCards.forEach((card) => {
     let rafId: number | null = null;
 
-    card.addEventListener('mouseenter', () => {
+    // En laptop: se activa al pasar el cursor
+    if (isDesktopPointer) {
+      card.addEventListener('mouseenter', () => {
+        setActiveCard(card);
+      });
+
+      card.addEventListener(
+        'mousemove',
+        (e: MouseEvent) => {
+          if (rafId !== null) return;
+          rafId = requestAnimationFrame(() => {
+            const rect = card.getBoundingClientRect();
+            card.style.setProperty('--mouse-x', `${Math.round(e.clientX - rect.left)}px`);
+            card.style.setProperty('--mouse-y', `${Math.round(e.clientY - rect.top)}px`);
+            rafId = null;
+          });
+        },
+        { passive: true }
+      );
+    }
+
+    // En móvil y pantallas táctiles: al tocar/hacer clic en una tarjeta se ilumina y desenfoca las demás
+    card.addEventListener('click', (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Si tocó directamente el enlace "Conocer más ->", iluminamos la tarjeta y dejamos que baje al formulario
+      if (target.closest('a[href="#contacto"]')) {
+        setActiveCard(card);
+        setTimeout(() => clearActiveCards(), 1200);
+        return;
+      }
+
       setActiveCard(card);
     });
-
-    card.addEventListener(
-      'mousemove',
-      (e: MouseEvent) => {
-        if (rafId !== null) return;
-        rafId = requestAnimationFrame(() => {
-          const rect = card.getBoundingClientRect();
-          card.style.setProperty('--mouse-x', `${Math.round(e.clientX - rect.left)}px`);
-          card.style.setProperty('--mouse-y', `${Math.round(e.clientY - rect.top)}px`);
-          rafId = null;
-        });
-      },
-      { passive: true }
-    );
   });
 
-  // Solo restauramos todas las tarjetas cuando el cursor sale por completo del bloque de servicios
-  servicesGrid?.addEventListener('mouseleave', () => {
-    clearActiveCards();
+  if (isDesktopPointer) {
+    servicesGrid?.addEventListener('mouseleave', () => {
+      clearActiveCards();
+    });
+  }
+
+  // Si en el celular el usuario toca fuera de las tarjetas, se quita el desenfoque
+  document.addEventListener('click', (e: MouseEvent) => {
+    const target = e.target as HTMLElement;
+    if (!target.closest('.cards .card') && !target.closest('.float-pill')) {
+      clearActiveCards();
+    }
   });
 
-  // 4. Al hacer clic en una cápsula del Hero, baja directo a esa tarjeta y la ilumina
+  // 4. Al hacer clic/tap en una cápsula del Hero, baja directo a esa tarjeta, la ilumina y desenfoca el resto
   document.querySelectorAll<HTMLAnchorElement>('.float-pill').forEach((pill) => {
     pill.addEventListener('click', (e: MouseEvent) => {
       const targetId = pill.getAttribute('data-target');
@@ -113,12 +139,6 @@ export function initInteractiveEffects(): void {
       e.preventDefault();
       targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
       setActiveCard(targetCard);
-
-      setTimeout(() => {
-        if (!servicesGrid?.matches(':hover')) {
-          clearActiveCards();
-        }
-      }, 2000);
     });
   });
 }
