@@ -7,6 +7,7 @@ export function initInteractiveEffects(): void {
   const pills = cityCard?.querySelectorAll<HTMLElement>('.float-pill');
   const screenBox = cityCard?.querySelector<HTMLElement>('.screen');
   const brandBlock = cityCard?.querySelector<HTMLElement>('.visual-brand-block');
+  const servicesGrid = document.getElementById('servicesGrid');
   const serviceCards = Array.from(document.querySelectorAll<HTMLElement>('.cards .card'));
 
   // 1. Movimiento flotante suave en la tarjeta del Hero
@@ -59,92 +60,49 @@ export function initInteractiveEffects(): void {
     });
   }
 
-  // 3. Efecto garantizado en Nuestros Servicios: Iluminar tarjeta activa + Desenfocar las demás
-  const highlightCard = (activeCard: HTMLElement): void => {
-    serviceCards.forEach((card) => {
-      if (card === activeCard) {
-        gsap.to(card, {
-          y: -12,
-          scale: 1.03,
-          filter: 'blur(0px) brightness(1.12)',
-          opacity: 1,
-          borderColor: '#e9c66c',
-          boxShadow: '0 24px 55px rgba(0,0,0,0.9), 0 0 35px rgba(255,23,72,0.45), 0 0 15px rgba(233,198,108,0.35)',
-          duration: 0.32,
-          ease: 'power2.out',
-          overwrite: 'auto'
-        });
-      } else {
-        gsap.to(card, {
-          y: 0,
-          scale: 0.95,
-          filter: 'blur(4.5px) brightness(0.5)',
-          opacity: 0.4,
-          borderColor: '#29282d',
-          boxShadow: 'none',
-          duration: 0.32,
-          ease: 'power2.out',
-          overwrite: 'auto'
-        });
-      }
-    });
+  // 3. Control instantáneo Focus/Blur en Nuestros Servicios (0ms lag, acelerado por CSS GPU)
+  const setActiveCard = (activeCard: HTMLElement): void => {
+    servicesGrid?.classList.add('is-hovering');
+    for (const card of serviceCards) {
+      card.classList.toggle('is-active-card', card === activeCard);
+    }
   };
 
-  const resetAllCards = (): void => {
-    serviceCards.forEach((card) => {
-      gsap.to(card, {
-        y: 0,
-        scale: 1,
-        filter: 'blur(0px) brightness(1)',
-        opacity: 1,
-        borderColor: '#29282d',
-        boxShadow: 'none',
-        duration: 0.35,
-        ease: 'power2.out',
-        overwrite: 'auto'
-      });
-    });
+  const clearActiveCards = (): void => {
+    servicesGrid?.classList.remove('is-hovering');
+    for (const card of serviceCards) {
+      card.classList.remove('is-active-card');
+    }
   };
 
   serviceCards.forEach((card) => {
-    card.addEventListener('mouseenter', () => highlightCard(card));
-    card.addEventListener('mouseleave', () => resetAllCards());
+    let rafId: number | null = null;
 
-    card.addEventListener('mousemove', (e: MouseEvent) => {
-      const rect = card.getBoundingClientRect();
-      card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-      card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+    card.addEventListener('mouseenter', () => {
+      setActiveCard(card);
     });
+
+    card.addEventListener(
+      'mousemove',
+      (e: MouseEvent) => {
+        if (rafId !== null) return;
+        rafId = requestAnimationFrame(() => {
+          const rect = card.getBoundingClientRect();
+          card.style.setProperty('--mouse-x', `${Math.round(e.clientX - rect.left)}px`);
+          card.style.setProperty('--mouse-y', `${Math.round(e.clientY - rect.top)}px`);
+          rafId = null;
+        });
+      },
+      { passive: true }
+    );
   });
 
-  // 4. Iluminación garantizada en todos los botones de WhatsApp (Navbar, Contacto y Flotante)
-  const waButtons = document.querySelectorAll<HTMLElement>('.wa-outline, .wa-cta, .wa-float');
-  waButtons.forEach((btn) => {
-    btn.addEventListener('mouseenter', () => {
-      gsap.to(btn, {
-        scale: 1.07,
-        y: -3,
-        backgroundColor: '#25d366',
-        borderColor: '#a7f3d0',
-        color: '#ffffff',
-        boxShadow: '0 0 28px rgba(37, 211, 102, 0.85), 0 10px 30px rgba(37, 211, 102, 0.45)',
-        duration: 0.25,
-        ease: 'power2.out'
-      });
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      gsap.to(btn, {
-        scale: 1,
-        y: 0,
-        clearProps: 'backgroundColor,borderColor,color,boxShadow',
-        duration: 0.28,
-        ease: 'power2.out'
-      });
-    });
+  // Solo restauramos todas las tarjetas cuando el cursor sale por completo del bloque de servicios
+  servicesGrid?.addEventListener('mouseleave', () => {
+    clearActiveCards();
   });
 
-  // 5. Al hacer clic en una cápsula del Hero, baja directo a esa tarjeta y la ilumina
+  // 4. Al hacer clic en una cápsula del Hero, baja directo a esa tarjeta y la ilumina
   document.querySelectorAll<HTMLAnchorElement>('.float-pill').forEach((pill) => {
     pill.addEventListener('click', (e: MouseEvent) => {
       const targetId = pill.getAttribute('data-target');
@@ -154,11 +112,13 @@ export function initInteractiveEffects(): void {
 
       e.preventDefault();
       targetCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      highlightCard(targetCard);
+      setActiveCard(targetCard);
 
       setTimeout(() => {
-        resetAllCards();
-      }, 2200);
+        if (!servicesGrid?.matches(':hover')) {
+          clearActiveCards();
+        }
+      }, 2000);
     });
   });
 }
