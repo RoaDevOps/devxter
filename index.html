@@ -11,9 +11,47 @@
   <meta property="og:locale" content="es_MX">
   <meta property="og:image" content="/img/devxter-logo.png">
   <title>DevXter | Marketing, web y tecnología en CDMX</title>
+
+  <!-- 1. CRITICAL CSS INLINE: Evita el parpadeo de HTML simple (FOUC) desde el milisegundo 0 -->
+  <style>
+    html, body {
+      margin: 0;
+      background-color: #070709;
+      color: #f5f4f0;
+    }
+    body.intro-active {
+      overflow: hidden !important;
+    }
+    body.intro-active #app-view {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+    #intro-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 999999;
+      background-color: #070709;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #intro-subtitle {
+      opacity: 0;
+    }
+  </style>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- 2. CARGA SINCRÓNICA DE ESTILOS ANTES DEL PRIMER PINTADO -->
+  <link rel="stylesheet" href="/src/styles/main.css">
+
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",

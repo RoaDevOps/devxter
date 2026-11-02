@@ -871,10 +871,22 @@ footer small {
 }
 
 /* ==========================================================================
-   6. SISTEMA DE VISTA DE INTRO
+   6. SISTEMA DE VISTA DE INTRO Y REVELACIÓN LIMPIA
    ========================================================================== */
 body.intro-active {
   overflow: hidden !important;
+}
+
+body.intro-active #app-view {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+#app-view {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.6s ease;
 }
 
 /* ==========================================================================
