@@ -31,7 +31,7 @@ export class ParticleIntro {
   private animationFrameId: number | null = null;
   private isDispersing = false;
   private isPlaying = false;
-  private pointer = { x: -9999, y: -9999, radius: 85 };
+  private pointer = { x: -9999, y: -9999, radius: 75 };
   private timeline: gsap.core.Timeline | null = null;
 
   constructor(overlayId = 'intro-overlay', canvasId = 'intro-canvas') {
@@ -61,17 +61,13 @@ export class ParticleIntro {
     this.bindEvents();
   }
 
-  /**
-   * Fuerza por JS que la intro sea una pantalla independiente fija (position: fixed)
-   * para que NUNCA empuje la página web hacia abajo ni requiera hacer scroll.
-   */
   private applyFullscreenStyles(): void {
     Object.assign(this.overlay.style, {
       position: 'fixed',
       top: '0px',
       left: '0px',
       width: '100vw',
-      height: '100vh',
+      height: '100dvh',
       zIndex: '999999',
       backgroundColor: '#070709',
       display: 'flex',
@@ -96,15 +92,17 @@ export class ParticleIntro {
     if (this.subtitleEl) {
       Object.assign(this.subtitleEl.style, {
         position: 'absolute',
-        bottom: '14vh',
+        bottom: '12vh',
         left: '0px',
         right: '0px',
         zIndex: '2',
         margin: '0px',
+        padding: '0 24px',
         fontFamily: 'Montserrat, sans-serif',
         fontWeight: '600',
-        fontSize: '13px',
-        letterSpacing: '5px',
+        fontSize: 'clamp(10px, 2.6vw, 13px)',
+        lineHeight: '1.6',
+        letterSpacing: '4px',
         color: '#aaa7a0',
         textTransform: 'uppercase',
         textAlign: 'center',
@@ -118,7 +116,8 @@ export class ParticleIntro {
   private resizeCanvas = (): void => {
     const width = window.innerWidth;
     const height = window.innerHeight;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Soportamos hasta 3x de DPR para nitidez total en pantallas móviles Retina/AMOLED
+    const dpr = Math.min(window.devicePixelRatio || 1, 3);
 
     this.canvas.width = width * dpr;
     this.canvas.height = height * dpr;
@@ -146,8 +145,21 @@ export class ParticleIntro {
       },
       { passive: true }
     );
+
+    const clearPointer = (): void => {
+      this.pointer.x = -9999;
+      this.pointer.y = -9999;
+    };
+
+    window.addEventListener('touchend', clearPointer, { passive: true });
+    window.addEventListener('touchcancel', clearPointer, { passive: true });
+    window.addEventListener('mouseleave', clearPointer);
   }
 
+  /**
+   * Muestreo adaptativo HD: en móviles usa densidad alta (gap = 2) y tipografía grande
+   * para que las letras se formen con total nitidez sin verse borrosas.
+   */
   private sampleTextCoordinates(word: IntroStageWord): TargetPoint[] {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -159,25 +171,40 @@ export class ParticleIntro {
     if (!offCtx) return [];
 
     const isMobile = width < 650;
-    const fontSize =
-      word === 'BIENVENIDO A'
-        ? Math.min(Math.max(width * (isMobile ? 0.095 : 0.075), 28), 96)
-        : Math.min(Math.max(width * (isMobile ? 0.15 : 0.12), 46), 145);
+    const centerY = Math.round(height * 0.46);
 
-    offCtx.font = `800 ${fontSize}px Montserrat, sans-serif`;
     offCtx.textAlign = 'center';
     offCtx.textBaseline = 'middle';
 
-    const centerY = Math.round(height * 0.48);
-
     if (word === 'BIENVENIDO A') {
-      const grad = offCtx.createLinearGradient(width * 0.15, 0, width * 0.85, 0);
-      grad.addColorStop(0, '#f5f4f0');
-      grad.addColorStop(0.7, '#f5f4f0');
-      grad.addColorStop(1, '#e9c66c');
-      offCtx.fillStyle = grad;
-      offCtx.fillText('BIENVENIDO A', width / 2, centerY);
+      if (isMobile) {
+        // En móvil vertical dividimos en 2 líneas grandes para máxima nitidez
+        const mainSize = Math.min(Math.max(Math.floor(width * 0.125), 38), 58);
+        const subSize = Math.round(mainSize * 0.85);
+
+        offCtx.font = `800 ${mainSize}px Montserrat, sans-serif`;
+        offCtx.fillStyle = '#f5f4f0';
+        offCtx.fillText('BIENVENIDO', width / 2, centerY - mainSize * 0.65);
+
+        offCtx.font = `800 ${subSize}px Montserrat, sans-serif`;
+        offCtx.fillStyle = '#e9c66c';
+        offCtx.fillText('A', width / 2, centerY + mainSize * 0.65);
+      } else {
+        const fontSize = Math.min(Math.max(Math.floor(width * 0.075), 42), 96);
+        offCtx.font = `800 ${fontSize}px Montserrat, sans-serif`;
+        const grad = offCtx.createLinearGradient(width * 0.15, 0, width * 0.85, 0);
+        grad.addColorStop(0, '#f5f4f0');
+        grad.addColorStop(0.72, '#f5f4f0');
+        grad.addColorStop(1, '#e9c66c');
+        offCtx.fillStyle = grad;
+        offCtx.fillText('BIENVENIDO A', width / 2, centerY);
+      }
     } else {
+      const fontSize = isMobile
+        ? Math.min(Math.max(Math.floor(width * 0.175), 54), 84)
+        : Math.min(Math.max(Math.floor(width * 0.12), 64), 145);
+
+      offCtx.font = `800 ${fontSize}px Montserrat, sans-serif`;
       const part1 = 'DEV';
       const part2 = 'XTER';
       const w1 = offCtx.measureText(part1).width;
@@ -195,14 +222,15 @@ export class ParticleIntro {
 
     const imageData = offCtx.getImageData(0, 0, width, height).data;
     const points: TargetPoint[] = [];
-    const gap = isMobile ? 4 : 5;
+    // En móvil muestreamos cada 2px para que las letras tengan alta definición
+    const gap = isMobile ? 2 : 4;
 
     for (let y = 0; y < height; y += gap) {
       for (let x = 0; x < width; x += gap) {
         const index = (y * width + x) * 4;
         const alpha = imageData[index + 3];
 
-        if (alpha > 140) {
+        if (alpha > 150) {
           const r = imageData[index];
           const g = imageData[index + 1];
           const b = imageData[index + 2];
@@ -222,6 +250,11 @@ export class ParticleIntro {
     const targets = this.sampleTextCoordinates(word);
     const width = window.innerWidth;
     const height = window.innerHeight;
+    const isMobile = width < 650;
+
+    // Tamaño de punto más fino en móvil para definición nítida sin empastar las letras
+    const minSize = isMobile ? 0.85 : 1.25;
+    const sizeRange = isMobile ? 0.45 : 1.1;
 
     while (this.particles.length < targets.length) {
       const angle = Math.random() * Math.PI * 2;
@@ -234,15 +267,16 @@ export class ParticleIntro {
         tx: width / 2,
         ty: height / 2,
         color: '#f5f4f0',
-        size: Math.random() * 1.5 + 1.3,
+        size: minSize + Math.random() * sizeRange,
         alpha: 1,
-        friction: 0.89,
-        ease: 0.016 + Math.random() * 0.014
+        friction: 0.88,
+        ease: 0.018 + Math.random() * 0.014
       });
     }
 
     for (let i = 0; i < this.particles.length; i++) {
       const p = this.particles[i];
+      p.size = minSize + Math.random() * sizeRange;
       if (i < targets.length) {
         const target = targets[i];
         p.tx = target.x;
@@ -252,12 +286,12 @@ export class ParticleIntro {
       } else {
         p.tx = Math.random() * width;
         p.ty = Math.random() * height;
-        p.alpha = 0.12;
+        p.alpha = 0.08;
       }
     }
   }
 
-  private triggerSlowDispersion(strength = 4.5): void {
+  private triggerSlowDispersion(strength = 4.2): void {
     this.isDispersing = true;
     const centerX = window.innerWidth / 2;
     const centerY = window.innerHeight / 2;
@@ -266,7 +300,7 @@ export class ParticleIntro {
       const dx = p.x - centerX;
       const dy = p.y - centerY;
       const angle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 1.1;
-      const force = 1.5 + Math.random() * strength;
+      const force = 1.4 + Math.random() * strength;
       p.vx = Math.cos(angle) * force;
       p.vy = Math.sin(angle) * force;
     }
@@ -278,7 +312,8 @@ export class ParticleIntro {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    this.ctx.fillStyle = 'rgba(7, 7, 9, 0.28)';
+    // Limpieza más alta (0.42) para evitar estelas borrosas en pantallas pequeñas
+    this.ctx.fillStyle = 'rgba(7, 7, 9, 0.42)';
     this.ctx.fillRect(0, 0, width, height);
 
     for (const p of this.particles) {
@@ -297,8 +332,8 @@ export class ParticleIntro {
       if (distSq < maxDistSq && distSq > 0) {
         const dist = Math.sqrt(distSq);
         const force = (this.pointer.radius - dist) / this.pointer.radius;
-        p.vx += (mdx / dist) * force * 2.2;
-        p.vy += (mdy / dist) * force * 2.2;
+        p.vx += (mdx / dist) * force * 2.0;
+        p.vy += (mdy / dist) * force * 2.0;
       }
 
       p.vx *= p.friction;
@@ -317,10 +352,6 @@ export class ParticleIntro {
     this.animationFrameId = requestAnimationFrame(this.renderLoop);
   };
 
-  /**
-   * Reproduce la pantalla de partículas fija a pantalla completa y al terminar
-   * desbloquea el scroll vertical para navegar libremente con la rueda del mouse.
-   */
   public async play(): Promise<void> {
     if (this.isPlaying) return;
     this.isPlaying = true;
@@ -330,11 +361,9 @@ export class ParticleIntro {
       this.timeline.kill();
     }
 
-    // Aseguramos que el Hero ya esté visible detrás del telón en el tope (0,0)
     window.scrollTo(0, 0);
     document.querySelectorAll('.hero .reveal').forEach((el) => el.classList.add('visible'));
 
-    // Bloqueamos el scroll únicamente mientras corren las partículas
     this.applyFullscreenStyles();
     document.body.classList.add('intro-active');
     document.body.style.overflow = 'hidden';
@@ -353,7 +382,6 @@ export class ParticleIntro {
       await document.fonts.ready;
     }
 
-    // ACTO 1 (0.0s a 3.3s): Formar "BIENVENIDO A"
     this.morphToWord('BIENVENIDO A');
     this.renderLoop();
 
@@ -361,10 +389,8 @@ export class ParticleIntro {
       onComplete: () => this.finish()
     });
 
-    // ACTO 2 (3.3s a 4.2s): Dispersión lenta
-    this.timeline.call(() => this.triggerSlowDispersion(4.2), [], 3.3);
+    this.timeline.call(() => this.triggerSlowDispersion(4.0), [], 3.3);
 
-    // ACTO 3 (4.2s a 7.6s): Formar "DEVXTER"
     this.timeline.call(
       () => {
         this.isDispersing = false;
@@ -383,10 +409,9 @@ export class ParticleIntro {
       4.2
     );
 
-    // ACTO 4 (7.6s a 8.7s): Disolver partículas y liberar el scroll de la página
     this.timeline.call(
       () => {
-        this.triggerSlowDispersion(5.5);
+        this.triggerSlowDispersion(5.0);
         document.body.classList.remove('intro-active');
         document.body.style.overflow = '';
         document.body.style.overflowY = 'auto';
@@ -417,7 +442,6 @@ export class ParticleIntro {
       this.animationFrameId = null;
     }
 
-    // Ocultamos el overlay y liberamos al 100% la rueda del mouse
     this.overlay.style.display = 'none';
     this.overlay.style.pointerEvents = 'none';
     document.body.classList.remove('intro-active');
