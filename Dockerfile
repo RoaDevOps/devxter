@@ -14,7 +14,7 @@ COPY . .
 RUN npm run build
 
 # ==========================================================================
-# ETAPA 2: Servidor de producción ligero con NGINX
+# ETAPA 2: Servidor de producción 
 # ==========================================================================
 FROM nginx:1.27-alpine AS production
 
