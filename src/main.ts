@@ -3,6 +3,7 @@ import { initNavbarAndScroll } from './ui/navbar';
 import { initLeadForm } from './services/leadForm';
 import { ParticleIntro } from './animations/ParticleIntro';
 import { initInteractiveEffects } from './animations/scrollEffects';
+import { initXterBot } from './ui/xterbot';
 
 function setupParticleIntro(): void {
   const overlay = document.getElementById('intro-overlay');
@@ -36,4 +37,5 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbarAndScroll();
   initInteractiveEffects();
   initLeadForm();
+  initXterBot();
 });
