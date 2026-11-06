@@ -4,70 +4,415 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#070709">
-  <meta name="description" content="DevXter: estrategia, marketing, desarrollo web y soluciones digitales para negocios en CDMX.">
+  <meta name="description" content="DevXter: agencia de estrategia, marketing digital, desarrollo web y soluciones tecnológicas a la medida para negocios en CDMX.">
+  <meta property="og:title" content="DevXter | Marketing, Web y Tecnología en CDMX">
+  <meta property="og:description" content="Estrategia, diseño y tecnología para convertir tu presencia digital en resultados reales.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_MX">
+  <meta property="og:image" content="/img/devxter-logo.png">
   <title>DevXter | Marketing, web y tecnología en CDMX</title>
+
+  <!-- 1. CRITICAL CSS INLINE: Evita el parpadeo de HTML simple (FOUC) desde el milisegundo 0 -->
+  <style>
+    html, body {
+      margin: 0;
+      background-color: #070709;
+      color: #f5f4f0;
+    }
+    body.intro-active {
+      overflow: hidden !important;
+    }
+    body.intro-active #app-view {
+      opacity: 0 !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+    #intro-overlay {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 999999;
+      background-color: #070709;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    #intro-subtitle {
+      opacity: 0;
+    }
+  </style>
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="assets/css/main.css">
+
+  <!-- 2. CARGA SINCRÓNICA DE ESTILOS ANTES DEL PRIMER PINTADO -->
+  <link rel="stylesheet" href="/src/styles/main.css">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "DevXter",
+    "description": "Agencia de marketing digital, desarrollo web y soluciones tecnológicas en Ciudad de México.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Ciudad de México",
+      "addressRegion": "CDMX",
+      "addressCountry": "MX"
+    },
+    "telephone": "+52-56-2165-0710",
+    "areaServed": "Ciudad de México"
+  }
+  </script>
 </head>
-<body>
-<header class="nav" id="nav">
-  <a class="brand" href="#inicio" aria-label="DevXter inicio"><img src="assets/img/devxter-logo.png" alt="DevXter"><span>DEVXTER</span></a>
-  <nav class="links" id="menu">
-    <a href="#inicio">Inicio</a><a href="#servicios">Servicios</a><a href="#nosotros">Nosotros</a><a href="#proceso">Proceso</a><a href="#contacto">Contacto</a>
-  </nav>
-  <div class="nav-right"><a class="wa-outline" href="https://wa.me/525621650710" target="_blank" rel="noopener">WhatsApp</a><button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button></div>
-</header>
-<main>
-<section class="hero" id="inicio">
-  <div class="hero-glow"></div>
-  <div class="hero-copy reveal">
-    <p class="eyebrow">AGENCIA DE MARKETING Y TECNOLOGÍA · CDMX</p>
-    <h1>Tu negocio,<br>listo para <em>crecer</em></h1>
-    <p class="lead">Estrategia, diseño y tecnología para convertir tu presencia digital en resultados reales.</p>
-    <div class="actions"><a class="btn primary" href="#contacto">Quiero una asesoría <b>→</b></a><a class="btn secondary" href="#servicios">Ver servicios</a></div>
-    <div class="benefits"><div><b>◎</b><span><strong>Estrategia</strong><small>Un plan claro</small></span></div><div><b>◇</b><span><strong>Ejecución</strong><small>Soluciones a la medida</small></span></div><div><b>✓</b><span><strong>Resultados</strong><small>Enfoque en crecimiento</small></span></div></div>
+<body class="intro-active">
+  <!-- VISTA 1: PANTALLA INDEPENDIENTE DE PARTÍCULAS -->
+  <div class="intro-overlay" id="intro-overlay" aria-hidden="true">
+    <canvas id="intro-canvas"></canvas>
+    <p class="intro-subtitle" id="intro-subtitle">
+      BIENVENIDO A <strong>DEVXTER</strong> · ESTRATEGIA, DISEÑO Y TECNOLOGÍA
+    </p>
   </div>
-  <div class="hero-visual reveal">
-    <div class="city-card">
-      <div class="orb"></div><div class="grid-lines"></div>
-      <div class="visual-title">DEV<span>XTER</span></div>
-      <p>IDEAS · ESTRATEGIA · DISEÑO<br>TECNOLOGÍA · RESULTADOS</p>
-      <div class="float-stack"><span>◉ Redes Sociales</span><span>◎ Página Web</span><span>▥ Publicidad ADS</span><span>◫ Fotografía y Video</span></div>
-      <div class="screen"><i></i><strong>Tu marca<br>en el mundo digital.</strong></div>
+
+  <!-- VISTA 2: SITIO WEB PRINCIPAL -->
+  <div id="app-view" class="app-view">
+    <header class="nav" id="nav">
+      <a class="brand" href="#inicio" aria-label="DevXter inicio" title="Doble clic para repetir intro">
+        <img src="/img/devxter-logo.png" alt="DevXter" width="52" height="52">
+        <span>DEVXTER</span>
+      </a>
+      <nav class="links" id="menu">
+        <a href="#inicio">Inicio</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#nosotros">Nosotros</a>
+        <a href="#proceso">Proceso</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav-right">
+        <a class="wa-outline" href="https://wa.me/525539106492?text=Hola%20DevXter,%20me%20interesa%20hacer%20crecer%20mi%20negocio" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+          </svg>
+          <span>WhatsApp</span>
+        </a>
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" id="inicio">
+        <div class="hero-glow"></div>
+        <div class="hero-copy reveal">
+          <p class="eyebrow">AGENCIA DE MARKETING Y TECNOLOGÍA · CDMX</p>
+          <h1>Tu negocio,<br>listo para <em>crecer</em></h1>
+          <p class="lead">Estrategia, diseño y tecnología para convertir tu presencia digital en resultados reales.</p>
+          <div class="actions">
+            <a class="btn primary" href="#contacto">Quiero una asesoría <b>→</b></a>
+            <a class="btn secondary" href="#servicios">Ver servicios</a>
+          </div>
+          <div class="benefits">
+            <div>
+              <b>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>
+                </svg>
+              </b>
+              <span><strong>Estrategia</strong><small>Un plan claro</small></span>
+            </div>
+            <div>
+              <b>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>
+                </svg>
+              </b>
+              <span><strong>Ejecución</strong><small>Soluciones a la medida</small></span>
+            </div>
+            <div>
+              <b>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/>
+                </svg>
+              </b>
+              <span><strong>Resultados</strong><small>Enfoque en crecimiento</small></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal" id="heroVisual">
+          <div class="city-card" id="cityCard">
+            <div class="orb"></div>
+            <div class="grid-lines"></div>
+
+            <!-- Cápsulas interactivas compactas que llevan a cada servicio -->
+            <div class="float-stack">
+              <a class="float-pill" href="#card-redes" data-target="card-redes">
+                <span class="pill-dot">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+                </span>
+                <span>Redes Sociales</span>
+              </a>
+              <a class="float-pill" href="#card-web" data-target="card-web">
+                <span class="pill-dot">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                </span>
+                <span>Página Web</span>
+              </a>
+              <a class="float-pill" href="#card-ads" data-target="card-ads">
+                <span class="pill-dot">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+                </span>
+                <span>Publicidad ADS</span>
+              </a>
+              <a class="float-pill" href="#card-foto" data-target="card-foto">
+                <span class="pill-dot">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>
+                </span>
+                <span>Fotografía y Video</span>
+              </a>
+            </div>
+
+            <div class="visual-brand-block">
+              <div class="visual-title">DEV<span>XTER</span></div>
+              <p class="visual-sub">IDEAS · ESTRATEGIA · DISEÑO<br>TECNOLOGÍA · RESULTADOS</p>
+            </div>
+
+            <div class="screen">
+              <i></i>
+              <strong>Tu marca<br>en el mundo digital.</strong>
+            </div>
+
+            <!-- Dock minimalista de Redes Sociales con enlaces directos -->
+            <div class="social-dock" aria-label="Redes sociales de DevXter">
+              <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram" title="Instagram">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+              </a>
+              <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook" title="Facebook">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+              </a>
+              <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok" title="TikTok">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+              </a>
+              <a href="https://wa.me/525539106492" target="_blank" rel="noopener" aria-label="WhatsApp" title="WhatsApp">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="services" id="servicios">
+        <div class="section-title reveal">
+          <div>
+            <p class="eyebrow">LO QUE HACEMOS</p>
+            <h2>Nuestros <em>servicios</em></h2>
+          </div>
+          <p>Soluciones digitales para negocios que quieren crecer.</p>
+        </div>
+        <div class="cards" id="servicesGrid">
+          <article class="card reveal" id="card-web" data-service="Páginas Web">
+            <span class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="7" x2="22" y2="7"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/>
+              </svg>
+            </span>
+            <h3>Páginas Web</h3>
+            <p>Sitios profesionales, rápidos, responsive y enfocados en convertir visitas en oportunidades.</p>
+            <a href="#contacto">Conocer más →</a>
+          </article>
+
+          <article class="card reveal" id="card-redes" data-service="Redes Sociales">
+            <span class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+              </svg>
+            </span>
+            <h3>Redes Sociales</h3>
+            <p>Contenido, estrategia y gestión para construir una presencia consistente.</p>
+            <a href="#contacto">Conocer más →</a>
+          </article>
+
+          <article class="card reveal" id="card-ads" data-service="Publicidad ADS">
+            <span class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/>
+              </svg>
+            </span>
+            <h3>Publicidad ADS</h3>
+            <p>Campañas digitales pensadas para atraer prospectos y generar conversaciones.</p>
+            <a href="#contacto">Conocer más →</a>
+          </article>
+
+          <article class="card reveal" id="card-foto" data-service="Fotografía y Video">
+            <span class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/>
+              </svg>
+            </span>
+            <h3>Fotografía y Video</h3>
+            <p>Contenido visual profesional para presentar mejor tu negocio y tus productos.</p>
+            <a href="#contacto">Conocer más →</a>
+          </article>
+
+          <article class="card reveal" id="card-soluciones" data-service="Soluciones Digitales">
+            <span class="card-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </span>
+            <h3>Soluciones Digitales</h3>
+            <p>Sistemas, automatizaciones, APIs y herramientas a la medida de tu operación.</p>
+            <a href="#contacto">Conocer más →</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="about" id="nosotros">
+        <div class="about-copy reveal">
+          <p class="eyebrow">DEVXTER</p>
+          <h2>No hacemos marketing bonito.<br><em>Hacemos marketing que vende.</em></h2>
+          <p>Combinamos marketing, desarrollo y tecnología para que cada pieza de tu presencia digital tenga una función: comunicar mejor, facilitar el contacto y ayudar a crecer tu negocio.</p>
+          <p>Ahora nuestra base de operaciones está en <strong>Ciudad de México</strong>, trabajando con negocios que quieren profesionalizar su presencia digital.</p>
+        </div>
+        <div class="about-panel reveal">
+          <div><b>01</b><h3>Analizamos</h3><p>Entendemos tu negocio, cliente y presencia actual.</p></div>
+          <div><b>02</b><h3>Construimos</h3><p>Diseñamos la solución que realmente necesitas.</p></div>
+          <div><b>03</b><h3>Optimizamos</h3><p>Medimos, ajustamos y buscamos oportunidades de mejora.</p></div>
+        </div>
+      </section>
+
+      <section class="process" id="proceso">
+        <div class="section-title reveal">
+          <div>
+            <p class="eyebrow">NUESTRO PROCESO</p>
+            <h2>De una idea a una <em>solución real</em></h2>
+          </div>
+        </div>
+        <div class="steps">
+          <div class="reveal"><b>01</b><h3>Diagnóstico</h3><p>Revisamos dónde estás y qué está frenando tu presencia digital.</p></div>
+          <div class="reveal"><b>02</b><h3>Estrategia</h3><p>Definimos prioridades, canales y una ruta clara de trabajo.</p></div>
+          <div class="reveal"><b>03</b><h3>Ejecución</h3><p>Diseñamos, desarrollamos y publicamos la solución.</p></div>
+          <div class="reveal"><b>04</b><h3>Mejora</h3><p>Damos seguimiento para que tu ecosistema digital siga evolucionando.</p></div>
+        </div>
+      </section>
+
+      <section class="contact" id="contacto">
+        <div class="contact-copy reveal">
+          <p class="eyebrow">HABLEMOS</p>
+          <h2>Tu siguiente cliente puede estar <em>buscándote ahora.</em></h2>
+          <p>Cuéntanos de tu negocio. Revisamos tu caso y te contactamos para conocer qué necesitas.</p>
+          <a class="btn wa-cta" href="https://wa.me/525539106492?text=Hola%20DevXter,%20quiero%20una%20asesor%C3%ADa" target="_blank" rel="noopener">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+            </svg>
+            <span>Hablar por WhatsApp</span>
+          </a>
+        </div>
+        <form id="leadForm" class="lead-form reveal">
+          <input type="text" name="website_url" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true">
+          <label>WhatsApp<input name="whatsapp" type="tel" placeholder="55 0000 0000" required></label>
+          <label>Correo<input name="email" type="email" placeholder="tu@negocio.com" required></label>
+          <label>¿A qué se dedica tu negocio?<input name="rubro" type="text" placeholder="Restaurante, estética, servicios..." required></label>
+          <button class="btn primary" id="submitBtn" type="submit">Solicitar diagnóstico →</button>
+          <p id="status" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand" href="#inicio" title="Doble clic para repetir intro">
+        <img src="/img/devxter-logo.png" alt="" width="52" height="52">
+        <span>DEVXTER</span>
+      </a>
+      <p>Marketing · Desarrollo Web · Soluciones Digitales</p>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+        </a>
+        <a href="https://wa.me/525539106492" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        </a>
+      </div>
+      <small>© 2026 DevXter · CDMX, México. Todos los derechos reservados.</small>
+    </footer>
+
+    <!-- WIDGET FLOTANTE: ASISTENTE IA "XTER" -->
+    <div class="xter-widget" id="xterWidget">
+      <!-- Globo típico de invitación: "Habla con Xter" -->
+      <div class="xter-Prompts" id="xterTooltip">
+        <button class="xter-tooltip-close" id="xterTooltipClose" type="button" aria-label="Cerrar mensaje">✕</button>
+        <div class="xter-tooltip-body" id="xterTooltipTrigger">
+          <span class="xter-status-dot"></span>
+          <p>👋 ¡Hola! <strong>Habla con Xter</strong><br><small>Tu asesor IA en línea</small></p>
+        </div>
+      </div>
+
+      <!-- Ventana de Chat Desplegable -->
+      <aside class="xter-chat-window" id="xterChatWindow" aria-label="Chat con Xter" aria-hidden="true">
+        <header class="xter-chat-header">
+          <div class="xter-header-info">
+            <div class="xter-avatar">
+              <img src="/img/devxter-logo.png" alt="Xter IA" width="36" height="36">
+              <span class="xter-online-badge"></span>
+            </div>
+            <div>
+              <strong>Xter · Asistente IA</strong>
+              <small>En línea · DevXter CDMX</small>
+            </div>
+          </div>
+          <button class="xter-close-btn" id="xterCloseBtn" type="button" aria-label="Cerrar chat">✕</button>
+        </header>
+
+        <div class="xter-chat-messages" id="xterMessages"></div>
+
+        <!-- Sugerencias rápidas -->
+        <div class="xter-quick-chips" id="xterQuickChips">
+          <button type="button" data-prompt="¿Qué incluye el desarrollo de Páginas Web?">💻 Páginas Web</button>
+          <button type="button" data-prompt="Quiero atraer clientes con Publicidad ADS">📈 Publicidad ADS</button>
+          <button type="button" data-prompt="¿Cómo manejan las Redes Sociales?">📱 Redes Sociales</button>
+          <button type="button" data-prompt="Quiero hablar con un asesor en WhatsApp">💬 WhatsApp directo</button>
+        </div>
+
+        <form class="xter-chat-input" id="xterChatForm">
+          <input
+            type="text"
+            id="xterInput"
+            placeholder="Escribe tu duda a Xter..."
+            autocomplete="off"
+            required
+          >
+          <button type="submit" id="xterSendBtn" aria-label="Enviar mensaje">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+            </svg>
+          </button>
+        </form>
+      </aside>
+
+      <!-- Botón Flotante Principal del Bot -->
+      <button class="xter-launcher" id="xterLauncher" type="button" aria-label="Hablar con Xter">
+        <span class="xter-launcher-pulse"></span>
+        <!-- Ícono del Bot Xter -->
+        <svg class="xter-icon-bot" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/>
+        </svg>
+        <!-- Ícono cerrar cuando está abierto -->
+        <svg class="xter-icon-close" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
     </div>
   </div>
-</section>
-<section class="services" id="servicios">
-  <div class="section-title reveal"><div><p class="eyebrow">LO QUE HACEMOS</p><h2>Nuestros <em>servicios</em></h2></div><p>Soluciones digitales para negocios que quieren crecer.</p></div>
-  <div class="cards">
-    <article class="card reveal"><span>▣</span><h3>Páginas Web</h3><p>Sitios profesionales, rápidos, responsive y enfocados en convertir visitas en oportunidades.</p><a href="#contacto">Conocer más →</a></article>
-    <article class="card reveal"><span>♙</span><h3>Redes Sociales</h3><p>Contenido, estrategia y gestión para construir una presencia consistente.</p><a href="#contacto">Conocer más →</a></article>
-    <article class="card reveal"><span>▥</span><h3>Publicidad ADS</h3><p>Campañas digitales pensadas para atraer prospectos y generar conversaciones.</p><a href="#contacto">Conocer más →</a></article>
-    <article class="card reveal"><span>◫</span><h3>Fotografía y Video</h3><p>Contenido visual profesional para presentar mejor tu negocio y tus productos.</p><a href="#contacto">Conocer más →</a></article>
-    <article class="card reveal"><span>⚙</span><h3>Soluciones Digitales</h3><p>Sistemas, automatizaciones, APIs y herramientas a la medida de tu operación.</p><a href="#contacto">Conocer más →</a></article>
-  </div>
-</section>
-<section class="about" id="nosotros">
-  <div class="about-copy reveal"><p class="eyebrow">DEVXTER</p><h2>No hacemos marketing bonito.<br><em>Hacemos marketing que vende.</em></h2><p>Combinamos marketing, desarrollo y tecnología para que cada pieza de tu presencia digital tenga una función: comunicar mejor, facilitar el contacto y ayudar a crecer tu negocio.</p><p>Ahora nuestra base de operaciones está en <strong>Ciudad de México</strong>, trabajando con negocios que quieren profesionalizar su presencia digital.</p></div>
-  <div class="about-panel reveal"><div><b>01</b><h3>Analizamos</h3><p>Entendemos tu negocio, cliente y presencia actual.</p></div><div><b>02</b><h3>Construimos</h3><p>Diseñamos la solución que realmente necesitas.</p></div><div><b>03</b><h3>Optimizamos</h3><p>Medimos, ajustamos y buscamos oportunidades de mejora.</p></div></div>
-</section>
-<section class="process" id="proceso">
-  <div class="section-title reveal"><div><p class="eyebrow">NUESTRO PROCESO</p><h2>De una idea a una <em>solución real</em></h2></div></div>
-  <div class="steps"><div class="reveal"><b>01</b><h3>Diagnóstico</h3><p>Revisamos dónde estás y qué está frenando tu presencia digital.</p></div><div class="reveal"><b>02</b><h3>Estrategia</h3><p>Definimos prioridades, canales y una ruta clara de trabajo.</p></div><div class="reveal"><b>03</b><h3>Ejecución</h3><p>Diseñamos, desarrollamos y publicamos la solución.</p></div><div class="reveal"><b>04</b><h3>Mejora</h3><p>Damos seguimiento para que tu ecosistema digital siga evolucionando.</p></div></div>
-</section>
-<section class="contact" id="contacto">
-  <div class="contact-copy reveal"><p class="eyebrow">HABLEMOS</p><h2>Tu siguiente cliente puede estar <em>buscándote ahora.</em></h2><p>Cuéntanos de tu negocio. Revisamos tu caso y te contactamos para conocer qué necesitas.</p><a class="btn secondary" href="https://wa.me/525621650710" target="_blank" rel="noopener">Hablar por WhatsApp</a></div>
-  <form id="leadForm" class="lead-form reveal">
-    <label>WhatsApp<input name="whatsapp" type="tel" placeholder="55 0000 0000" required></label>
-    <label>Correo<input name="email" type="email" placeholder="tu@negocio.com" required></label>
-    <label>¿A qué se dedica tu negocio?<input name="rubro" type="text" placeholder="Restaurante, estética, servicios..." required></label>
-    <button class="btn primary" id="submitBtn" type="submit">Solicitar diagnóstico →</button><p id="status" aria-live="polite"></p>
-  </form>
-</section>
-</main>
-<footer><a class="brand" href="#inicio"><img src="assets/img/devxter-logo.png" alt=""><span>DEVXTER</span></a><p>Marketing · Desarrollo Web · Soluciones Digitales</p><p>CDMX · México</p><small>© 2026 DevXter. Todos los derechos reservados.</small></footer>
-<a class="wa-float" href="https://wa.me/525621650710" target="_blank" rel="noopener" aria-label="WhatsApp">◉</a>
-<script src="assets/js/main.js"></script>
-</body></html>
+
+  <script type="module" src="/src/main.ts"></script>
+</body>
+</html>
