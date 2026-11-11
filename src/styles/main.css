@@ -1,6 +1,7 @@
 /* ==========================================================================
-   1. VARIABLES Y RESET BASE 
+   1. VARIABLES Y RESET BASE
    ========================================================================== */
+
 :root {
   --bg: #070709;
   --panel: #0e0e12;
@@ -51,19 +52,21 @@ a {
   text-decoration: none;
 }
 
-/* Evita que cualquier hijo de un CSS Grid expanda la pantalla en móviles */
-.hero > *,
-.cards > *,
-.about > *,
-.steps > *,
-.contact > *,
-footer > * {
+/* Evita que los hijos de Grid expandan la pantalla en móviles */
+.hero>*,
+.cards>*,
+.about>*,
+.steps>*,
+.contact>*,
+footer>* {
   min-width: 0;
 }
 
+
 /* ==========================================================================
-   2. NAVEGACIÓN (NAVBAR) 
+   2. NAVEGACIÓN (NAVBAR)
    ========================================================================== */
+
 .nav {
   height: 82px;
   position: fixed;
@@ -172,9 +175,11 @@ footer > * {
   cursor: pointer;
 }
 
+
 /* ==========================================================================
-   3. SECCIÓN HERO 
+   3. SECCIÓN HERO
    ========================================================================== */
+
 .hero {
   min-height: 760px;
   padding: 140px 6vw 70px;
@@ -205,22 +210,100 @@ footer > * {
   margin: 0 0 18px;
 }
 
-.hero h1,
-.section-title h2,
-.about h2,
-.contact h2 {
+/* TÍTULO PRINCIPAL */
+
+.hero h1 {
   font-family: Montserrat, sans-serif;
   font-size: clamp(38px, 6.2vw, 96px);
   line-height: 1.02;
   letter-spacing: -0.04em;
-  margin: 0;
+  margin: auto;
   overflow-wrap: break-word;
+  text-align: center;
+}
+
+/* ==========================================================================
+   TODOS LOS H2 — TÍTULOS GENERALES
+   ========================================================================== */
+
+main h2,
+.OPINIONES h2 {
+  display: block;
+  position: relative;
+  width: 100%;
+
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(38px, 5vw, 68px);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: 2px;
+
+  text-align: center;
+  margin: 0 auto 25px;
+
+  overflow-wrap: break-word;
+}
+
+/* SUBRAYADO GENERAL DE LOS H2 */
+
+main h2::after,
+.OPINIONES h2::after {
+  content: "";
+  display: block;
+  position: absolute;
+
+  width: 150px;
+  height: 2px;
+
+  left: 50%;
+  bottom: -7px;
+
+  transform: translateX(-50%);
+
+  border-radius: 10px;
+
+  background: linear-gradient(90deg,
+      transparent,
+      #174B40,
+      #80B6A0,
+      #397C67,
+      transparent);
+
+  box-shadow: 0 1px 5px rgba(197, 164, 109, 0.15);
+}
+
+
+/* SÍMBOLOS */
+
+.simbolos {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 20px;
+  flex-direction: row-reverse;
+}
+
+.icono-caja i {
+  font-size: 23px;
+  color: #d4c5c5;
+}
+
+.icono-caja {
+  width: 55px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgb(42, 14, 170);
+  border: 2px solid rgba(0, 0, 0, 0.45);
+  border-radius: 12px;
 }
 
 .hero h1 em,
 .section-title em,
 .about em,
-.contact em {
+.contact em,
+.OPINIONES em {
   font-style: normal;
   color: var(--gold);
 }
@@ -310,7 +393,7 @@ footer > * {
   margin-top: 40px;
 }
 
-.benefits > div {
+.benefits>div {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -342,6 +425,9 @@ footer > * {
   color: var(--muted);
   margin-top: 2px;
 }
+
+
+/* HERO VISUAL */
 
 .hero-visual {
   min-height: 560px;
@@ -543,30 +629,46 @@ footer > * {
   box-shadow: 0 0 20px rgba(255, 23, 72, 0.65);
 }
 
+
 /* ==========================================================================
-   4. SERVICIOS 
+   4. SERVICIOS
    ========================================================================== */
+
 .services,
 .process {
   padding: 100px 6vw;
 }
 
+/* Encabezados de las secciones */
+
 .section-title {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 30px;
-  margin-bottom: 45px;
+  display: block;
+  width: 100%;
+  margin: 0 auto 45px;
+  text-align: center;
+}
+
+.section-title>div {
+  width: 100%;
+  min-width: 0;
 }
 
 .section-title h2 {
-  font-size: clamp(34px, 5vw, 68px);
-  letter-spacing: -0.04em;
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin: 0 auto;
 }
 
-.section-title > p {
+.section-title>p {
+  max-width: 600px;
   color: var(--muted);
+  text-align: center;
+  margin: 18px auto 0;
 }
+
+
+/* TARJETAS DE SERVICIOS */
 
 .cards {
   display: grid;
@@ -597,14 +699,16 @@ footer > * {
     box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* Desenfoque en GPU para las tarjetas inactivas (tanto con mouse en PC como al tocar en móvil) */
+/* Desenfoque de tarjetas inactivas */
+
 .cards.is-hovering .card:not(.is-active-card) {
   filter: blur(2.5px);
   opacity: 0.38;
   transform: scale(0.96) translateZ(0);
 }
 
-/* Iluminación inmediata de la tarjeta seleccionada */
+/* Iluminación de la tarjeta seleccionada */
+
 .cards.is-hovering .card.is-active-card {
   filter: blur(0px);
   opacity: 1;
@@ -622,11 +726,9 @@ footer > * {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    280px circle at var(--mouse-x) var(--mouse-y),
-    rgba(255, 23, 72, 0.22),
-    transparent 65%
-  );
+  background: radial-gradient(280px circle at var(--mouse-x) var(--mouse-y),
+      rgba(255, 23, 72, 0.22),
+      transparent 65%);
   opacity: 0;
   transition: opacity 0.18s ease;
   pointer-events: none;
@@ -693,9 +795,14 @@ footer > * {
   color: #fff;
 }
 
+
 /* ==========================================================================
    5. NOSOTROS, PROCESO, CONTACTO Y FOOTER
    ========================================================================== */
+
+
+/* NOSOTROS */
+
 .about {
   padding: 110px 6vw;
   display: grid;
@@ -704,12 +811,7 @@ footer > * {
   background: linear-gradient(90deg, #09090b, #0d0c0d);
 }
 
-.about h2 {
-  font-size: clamp(34px, 4.7vw, 68px);
-  letter-spacing: -0.04em;
-}
-
-.about-copy > p:not(.eyebrow) {
+.about-copy>p:not(.eyebrow) {
   font-size: 18px;
   color: var(--muted);
   line-height: 1.7;
@@ -721,7 +823,7 @@ footer > * {
   border-top: 1px solid var(--line);
 }
 
-.about-panel > div {
+.about-panel>div {
   padding: 26px 0;
   border-bottom: 1px solid var(--line);
   display: grid;
@@ -736,8 +838,9 @@ footer > * {
 }
 
 .about-panel h3 {
-  margin: 0;
+  margin: auto;
   font: 700 20px Montserrat, sans-serif;
+  letter-spacing: 2px;
 }
 
 .about-panel p {
@@ -745,36 +848,98 @@ footer > * {
   color: var(--muted);
 }
 
+
+/* PROCESO */
+
 .steps {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-
-.steps > div {
-  padding: 35px;
-  border-right: 1px solid var(--line);
-}
-
-.steps > div:last-child {
-  border: 0;
-}
-
-.steps b {
-  color: var(--red);
-  font: 700 30px Montserrat, sans-serif;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  position: relative;
+  width: 100%;
 }
 
 .steps h3 {
-  font: 700 22px Montserrat, sans-serif;
-  margin: 28px 0 10px;
+  position: relative;
+  letter-spacing: 1.5px;
+  margin: 0 0 12px;
+  color: #fefefe;
+}
+
+/* Subrayado champagne de los H3 del proceso */
+
+.steps h3::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 85px;
+  height: 2px;
+  left: 50%;
+  bottom: -7px;
+  transform: translateX(-50%);
+  border-radius: 10px;
+
+  background: linear-gradient(90deg,
+      transparent,
+      #A98954 25%,
+      #F3DDAF 50%,
+      #A98954 75%,
+      transparent);
+
+  box-shadow: 0 1px 5px rgba(197, 164, 109, 0.15);
+}
+
+.steps>div {
+  padding: 30px;
+  position: relative;
+  min-height: 230px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-color: #111;
+  border-radius: 18px;
+
+  /* Borde y sombras */
+  border: 1px solid #ff0000;
+  box-shadow:
+    0 0 5px #ff0000,
+    0 0 5px #ff0000,
+    0 0 5px #ff0000;
 }
 
 .steps p {
-  color: var(--muted);
-  line-height: 1.6;
+  position: relative;
+  z-index: 1;
+  margin-top: 0;
+  margin-bottom: 0;
+  color: #a49f9f;
+  line-height: 1.5;
+  max-width: 320px;
 }
+
+/* Imagen por celda */
+
+.step-1 {
+  background-image: url('/img/DIAGNOSTICO.png');
+}
+
+.step-2 {
+  background-image: url('/img/ESTRATEGIA.png');
+}
+
+.step-3 {
+  background-image: url('/img/EJECUCION.png');
+}
+
+.step-4 {
+  background-image: url('/img/MEJORA.png');
+}
+
+
+/* CONTACTO */
 
 .contact {
   margin: 60px 6vw 90px;
@@ -789,12 +954,7 @@ footer > * {
     linear-gradient(135deg, #111014, #09090b);
 }
 
-.contact h2 {
-  font-size: clamp(32px, 4.8vw, 68px);
-  letter-spacing: -0.04em;
-}
-
-.contact-copy > p:not(.eyebrow) {
+.contact-copy>p:not(.eyebrow) {
   color: var(--muted);
   font-size: 18px;
   line-height: 1.6;
@@ -838,6 +998,9 @@ footer > * {
   color: var(--muted);
 }
 
+
+/* FOOTER */
+
 footer {
   padding: 50px 6vw;
   border-top: 1px solid var(--line);
@@ -857,6 +1020,9 @@ footer {
 footer small {
   grid-column: 1 / -1;
 }
+
+
+/* BOTÓN FLOTANTE WHATSAPP */
 
 .wa-float {
   position: fixed;
@@ -882,6 +1048,9 @@ footer small {
     0 15px 35px rgba(37, 211, 102, 0.5);
 }
 
+
+/* REVEAL */
+
 .reveal {
   opacity: 0;
   transform: translateY(20px);
@@ -893,9 +1062,11 @@ footer small {
   transform: none;
 }
 
+
 /* ==========================================================================
    6. SISTEMA DE VISTA DE INTRO Y REVELACIÓN LIMPIA
    ========================================================================== */
+
 body.intro-active {
   overflow: hidden !important;
 }
@@ -912,19 +1083,26 @@ body.intro-active #app-view {
   transition: opacity 0.6s ease;
 }
 
+
 /* ==========================================================================
-   7. MEDIA QUERIES 
+   7. MEDIA QUERIES
    ========================================================================== */
+
 @media (max-width: 1150px) {
+
   .cards {
     grid-template-columns: repeat(2, 1fr);
   }
+
   .cards .card:last-child {
     grid-column: 1 / -1;
   }
+
 }
 
+
 @media (max-width: 1050px) {
+
   .links {
     display: none;
     position: absolute;
@@ -938,92 +1116,121 @@ body.intro-active #app-view {
     flex-direction: column;
     gap: 20px;
   }
+
   .links.open {
     display: flex;
   }
+
   .menu-btn {
     display: block;
   }
+
   .hero {
     grid-template-columns: 1fr;
   }
+
   .hero-copy {
     padding-top: 10px;
   }
+
   .hero-visual,
   .city-card {
     min-height: 490px;
   }
+
   .about,
   .contact {
     grid-template-columns: 1fr;
   }
+
   .steps {
     grid-template-columns: repeat(2, 1fr);
   }
+
   footer {
     grid-template-columns: 1fr 1fr;
   }
+
 }
 
+
+/* ==========================================================================
+   MÓVIL — HASTA 650PX
+   ========================================================================== */
+
 @media (max-width: 650px) {
+
   .nav {
     height: 70px;
     padding: 0 16px;
   }
+
   .brand {
     letter-spacing: 2.5px;
     font-size: 14px;
     gap: 9px;
   }
+
   .brand img {
     width: 38px;
     height: 38px;
   }
+
   .wa-outline {
     padding: 8px 13px;
     font-size: 12px;
     gap: 6px;
   }
+
   .wa-outline svg {
     width: 14px;
     height: 14px;
   }
+
   .links {
     top: 70px;
     padding: 22px 16px;
   }
 
-  /* Hero 100% contenido en el ancho de pantalla móvil */
+
+  /* HERO */
+
   .hero {
     min-height: auto;
     padding: 96px 16px 40px;
     gap: 28px;
   }
+
   .eyebrow {
     font-size: 11px;
     letter-spacing: 1.5px;
     margin-bottom: 14px;
   }
+
   .hero h1 {
     font-size: clamp(36px, 11vw, 48px);
     line-height: 1.04;
     letter-spacing: -1.5px;
   }
+
   .lead {
     font-size: 16px;
     margin: 18px 0 24px;
   }
+
   .actions {
     display: grid;
     grid-template-columns: 1fr;
     gap: 12px;
   }
+
   .actions .btn {
     width: 100%;
   }
 
-  /* Beneficios apilados limpiamente sin desbordar la pantalla */
+
+  /* BENEFICIOS */
+
   .benefits {
     display: grid;
     grid-template-columns: 1fr;
@@ -1034,14 +1241,18 @@ body.intro-active #app-view {
     border: 1px solid var(--line);
     border-radius: 16px;
   }
-  .benefits > div {
+
+  .benefits>div {
     align-items: center;
   }
 
-  /* Tarjeta visual del Hero convertida en layout flexible sin encimamientos */
+
+  /* HERO VISUAL */
+
   .hero-visual {
     min-height: auto;
   }
+
   .city-card {
     min-height: auto;
     padding: 22px 16px;
@@ -1049,6 +1260,7 @@ body.intro-active #app-view {
     flex-direction: column;
     gap: 18px;
   }
+
   .orb {
     width: 110px;
     height: 110px;
@@ -1056,6 +1268,7 @@ body.intro-active #app-view {
     top: -15px;
     opacity: 0.55;
   }
+
   .visual-brand-block {
     position: relative;
     top: auto;
@@ -1063,15 +1276,18 @@ body.intro-active #app-view {
     text-align: left;
     order: 1;
   }
+
   .visual-title {
     font-size: 26px;
     letter-spacing: 4px;
     margin-bottom: 4px;
   }
+
   .visual-sub {
     font-size: 10px;
     letter-spacing: 1.4px;
   }
+
   .float-stack {
     position: relative;
     top: auto;
@@ -1081,16 +1297,19 @@ body.intro-active #app-view {
     gap: 10px;
     order: 2;
   }
+
   .float-pill {
     padding: 9px 10px;
     font-size: 12px;
     gap: 8px;
     width: 100%;
   }
+
   .float-pill .pill-dot {
     width: 24px;
     height: 24px;
   }
+
   .screen {
     position: relative;
     left: auto;
@@ -1100,9 +1319,11 @@ body.intro-active #app-view {
     padding: 18px;
     order: 3;
   }
+
   .screen strong {
     font-size: 16px;
   }
+
   .social-dock {
     position: relative;
     right: auto;
@@ -1115,57 +1336,101 @@ body.intro-active #app-view {
     order: 4;
   }
 
-  /* Secciones inferiores adaptadas a móvil */
+
+  /* SECCIONES */
+
   .services,
   .process,
   .about {
     padding: 64px 16px;
   }
+
   .section-title {
     display: block;
-    margin-bottom: 30px;
+    width: 100%;
+    margin: 0 auto 30px;
+    text-align: center;
   }
+
+  .section-title>div {
+    width: 100%;
+  }
+
+  .section-title>p {
+    margin: 16px auto 0;
+    text-align: center;
+  }
+
+
+  /* H2 EN MÓVILES */
+
   .section-title h2,
   .about h2,
-  .contact h2 {
+  .contact h2,
+  .OPINIONES h2 {
     font-size: clamp(32px, 9.5vw, 42px);
     letter-spacing: -1.5px;
     line-height: 1.06;
   }
+
+
+  /* TARJETAS */
+
   .cards {
     grid-template-columns: 1fr;
     gap: 14px;
   }
+
   .card {
     min-height: auto;
     padding: 24px 20px;
   }
+
   .card h3 {
     margin: 22px 0 10px;
   }
+
+
+  /* NOSOTROS */
+
   .about {
     gap: 36px;
   }
-  .about-copy > p:not(.eyebrow) {
+
+  .about-copy>p:not(.eyebrow) {
     font-size: 16px;
   }
+
+
+  /* PROCESO */
+
   .steps {
     grid-template-columns: 1fr;
   }
-  .steps > div {
+
+  .steps>div {
     border-right: 0;
     border-bottom: 1px solid var(--line);
     padding: 24px 6px;
   }
+
+
+  /* CONTACTO */
+
   .contact {
     margin: 20px 16px 60px;
     padding: 32px 18px;
     gap: 32px;
     border-radius: 22px;
   }
+
   .contact .btn {
     width: 100%;
   }
+
+
+  /* FOOTER */
+
   footer {
     padding: 36px 16px 90px;
     grid-template-columns: 1fr;
@@ -1173,17 +1438,25 @@ body.intro-active #app-view {
     text-align: center;
     justify-items: center;
   }
+
+
+  /* WHATSAPP */
+
   .wa-float {
     right: 16px;
     bottom: 16px;
     width: 52px;
     height: 52px;
   }
+
 }
 
+
 /* ==========================================================================
-   8. WIDGET IA "XTER" — DISEÑO COMPACTO ESTILO INTERCOM / LINEAR
+   8. WIDGET IA "XTER"
+   DISEÑO COMPACTO ESTILO INTERCOM / LINEAR
    ========================================================================== */
+
 .xter-widget {
   position: fixed;
   right: 20px;
@@ -1194,7 +1467,9 @@ body.intro-active #app-view {
   font-family: 'DM Sans', sans-serif;
 }
 
-/* 1. Globo "Habla con Xter" más compacto y elegante */
+
+/* GLOBO "HABLA CON XTER" */
+
 .xter-Prompts {
   position: absolute;
   bottom: 66px;
@@ -1237,8 +1512,16 @@ body.intro-active #app-view {
 }
 
 @keyframes xterFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-4px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-4px);
+  }
+
 }
 
 .xter-tooltip-body {
@@ -1291,7 +1574,9 @@ body.intro-active #app-view {
   color: #fff;
 }
 
-/* 2. Botón Redondo del Bot (54px): SE OCULTA cuando el chat está abierto para no robar altura */
+
+/* BOTÓN REDONDO DEL BOT */
+
 .xter-launcher {
   position: absolute;
   right: 0;
@@ -1322,7 +1607,8 @@ body.intro-active #app-view {
     0 0 26px rgba(233, 198, 108, 0.45);
 }
 
-/* Cuando la ventana se abre, el botón redondo desaparece (efecto morphing) */
+/* Cuando la ventana se abre, el botón desaparece */
+
 .xter-widget.is-open .xter-launcher {
   transform: scale(0.4);
   opacity: 0;
@@ -1339,16 +1625,31 @@ body.intro-active #app-view {
 }
 
 @keyframes xterPulse {
-  0% { transform: scale(0.95); opacity: 0.8; }
-  70% { transform: scale(1.22); opacity: 0; }
-  100% { transform: scale(1.22); opacity: 0; }
+
+  0% {
+    transform: scale(0.95);
+    opacity: 0.8;
+  }
+
+  70% {
+    transform: scale(1.22);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.22);
+    opacity: 0;
+  }
+
 }
 
 .xter-icon-close {
   display: none;
 }
 
-/* 3. Ventana de Chat Compacta (312px × 365px) anclada hasta abajo (bottom: 0) */
+
+/* VENTANA DEL CHAT */
+
 .xter-chat-window {
   position: absolute;
   bottom: 0;
@@ -1389,11 +1690,16 @@ body.intro-active #app-view {
   transform: translateY(0) scale(1);
 }
 
-/* Modo expandido opcional si el usuario pulsa el botón de ampliar (⤢) */
+
+/* MODO EXPANDIDO */
+
 .xter-chat-window.is-expanded {
   width: 360px;
   height: min(470px, calc(100dvh - 105px));
 }
+
+
+/* CABECERA DEL CHAT */
 
 .xter-chat-header {
   padding: 11px 14px;
@@ -1480,7 +1786,9 @@ body.intro-active #app-view {
   color: #fff;
 }
 
-/* 4. Área de mensajes con Scrollbar Oscura Ultradelgada (4px) */
+
+/* ÁREA DE MENSAJES */
+
 .xter-chat-messages {
   flex: 1;
   padding: 12px;
@@ -1560,6 +1868,9 @@ body.intro-active #app-view {
   color: #fff;
 }
 
+
+/* INDICADOR DE ESCRITURA */
+
 .xter-typing .xter-bubble {
   display: inline-flex;
   align-items: center;
@@ -1575,15 +1886,33 @@ body.intro-active #app-view {
   animation: xterTyping 1.2s infinite ease-in-out;
 }
 
-.xter-typing .dot:nth-child(2) { animation-delay: 0.2s; }
-.xter-typing .dot:nth-child(3) { animation-delay: 0.4s; }
-
-@keyframes xterTyping {
-  0%, 80%, 100% { opacity: 0.25; transform: scale(0.8); }
-  40% { opacity: 1; transform: scale(1.15); }
+.xter-typing .dot:nth-child(2) {
+  animation-delay: 0.2s;
 }
 
-/* 5. Chips rápidos que se pliegan automáticamente al iniciar conversación */
+.xter-typing .dot:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes xterTyping {
+
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+
+  40% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+
+}
+
+
+/* CHIPS RÁPIDOS */
+
 .xter-quick-chips {
   padding: 6px 10px;
   display: flex;
@@ -1626,6 +1955,9 @@ body.intro-active #app-view {
   border-color: var(--gold);
   color: #fff;
 }
+
+
+/* CAMPO DE ENTRADA */
 
 .xter-chat-input {
   padding: 8px 10px;
@@ -1675,22 +2007,482 @@ body.intro-active #app-view {
   transform: scale(1.08);
 }
 
+
+/* XTER EN MÓVILES */
+
 @media (max-width: 650px) {
+
   .xter-widget {
     right: 14px;
     bottom: 14px;
     width: 50px;
     height: 50px;
   }
+
   .xter-launcher {
     width: 50px;
     height: 50px;
   }
+
   .xter-Prompts {
     bottom: 60px;
   }
+
   .xter-chat-window {
     width: calc(100vw - 28px);
     height: min(360px, calc(100dvh - 90px));
   }
+
 }
+
+
+/* ==========================================================================
+   9. SECCIÓN OPINIONES
+   ========================================================================== */
+
+.OPINIONES {
+  padding: 100px 6vw;
+  background: linear-gradient(90deg, #09090b, #0d0c0d);
+}
+
+/* Presentación: texto + imágenes */
+
+.OPINIONES-PRESENTACION {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 45px;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+/* Texto descriptivo */
+
+.parrafo-opiniones {
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.8;
+  text-align: justify;
+  margin: 0;
+}
+
+/* Galería de imágenes */
+
+.imagenes-opiniones {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Wrapper de cada imagen + overlay */
+
+.img-wrapper {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+/* Imágenes */
+
+.imagenes-opiniones img {
+  display: block;
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid rgba(233, 198, 108, 0.25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+/* Overlay */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 14px;
+}
+
+/* Hover en el wrapper */
+
+.img-wrapper:hover img {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+
+.img-wrapper:hover .overlay {
+  opacity: 1;
+}
+
+
+/* ==========================================================================
+   10. OPINIONES — RESPONSIVE
+   ========================================================================== */
+
+@media (max-width: 650px) {
+
+  .OPINIONES {
+    padding: 64px 16px;
+  }
+
+  .OPINIONES-PRESENTACION {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .parrafo-opiniones {
+    font-size: 15px;
+    text-align: left;
+    line-height: 1.7;
+  }
+
+  .imagenes-opiniones img {
+    height: 170px;
+  }
+
+}
+
+
+
+
+
+
+/* ==========================================================================
+   11. EXCLIENTES — DISEÑO PREMIUM
+   ========================================================================== */
+
+.exclientes {
+  padding: 90px 6vw 110px;
+  background:
+    radial-gradient(circle at 50% 0%,
+      rgba(233, 198, 108, 0.045),
+      transparent 45%),
+    #09090b;
+}
+
+/* ENCABEZADO */
+
+.exclientes-header {
+  text-align: center;
+  max-width: 750px;
+  margin: 0 auto 55px;
+}
+
+.exclientes-header h2 {
+  font-family: Montserrat, sans-serif;
+  font-size: clamp(32px, 4.5vw, 55px);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -1.5px;
+  margin: 0 auto 18px;
+}
+
+.exclientes-header h2 em {
+  font-style: normal;
+  color: var(--gold);
+}
+
+.exclientes-subtitle {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+  margin: 0;
+}
+
+/* GRID */
+
+.exclientes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: stretch;
+  gap: 24px;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+/* TARJETA */
+
+.cliente-card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(145deg,
+      #151419,
+      #0c0c10 75%);
+
+  border: 1px solid rgba(233, 198, 108, 0.18);
+  border-radius: 18px;
+  overflow: hidden;
+
+  box-shadow:
+    0 15px 35px rgba(0, 0, 0, 0.35);
+
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* HOVER */
+
+.cliente-card:hover {
+  transform: translateY(-8px);
+
+  border-color: rgba(233, 198, 108, 0.65);
+
+  box-shadow:
+    0 22px 45px rgba(0, 0, 0, 0.65),
+    0 0 22px rgba(233, 198, 108, 0.08);
+}
+
+/* IMAGEN */
+
+.cliente-imagen {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #17171c;
+}
+
+.cliente-imagen::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background: linear-gradient(to top,
+      rgba(0, 0, 0, 0.75),
+      transparent 65%);
+
+  pointer-events: none;
+}
+
+.cliente-imagen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+
+  transition: transform 0.55s ease;
+}
+
+.cliente-card:hover .cliente-imagen img {
+  transform: scale(1.055);
+}
+
+/* CATEGORÍA */
+
+.cliente-categoria {
+  position: absolute;
+  z-index: 2;
+  left: 16px;
+  bottom: 15px;
+
+  color: #f3dfb0;
+  font: 600 10px Montserrat, sans-serif;
+  letter-spacing: 1.5px;
+
+  padding: 7px 11px;
+
+  background: rgba(10, 10, 12, 0.78);
+  border: 1px solid rgba(233, 198, 108, 0.35);
+  border-radius: 20px;
+
+  backdrop-filter: blur(8px);
+}
+
+/* CONTENIDO */
+
+.cliente-contenido {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 24px 24px 22px;
+  position: relative;
+}
+
+/* COMILLAS */
+
+.cliente-comillas {
+  display: block;
+  height: 37px;
+
+  color: var(--gold);
+  font-family: Georgia, serif;
+  font-size: 57px;
+  line-height: 1;
+}
+
+/* TESTIMONIO */
+
+.cliente-contenido blockquote {
+  margin: 8px 0 25px;
+
+  color: #c5c2bc;
+  font-size: 14px;
+  line-height: 1.8;
+  font-weight: 400;
+
+  flex: 1;
+}
+
+/* INFORMACIÓN DEL CLIENTE */
+
+.cliente-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  padding-top: 19px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.cliente-footer h3 {
+  color: #f5f4f0;
+  font: 700 16px Montserrat, sans-serif;
+  letter-spacing: 0.3px;
+  margin: 0 0 6px;
+}
+
+.cliente-footer p {
+  color: var(--muted);
+  font-size: 12px;
+  margin: 0;
+}
+
+.cliente-numero {
+  color: rgba(233, 198, 108, 0.5);
+  font: 600 20px Montserrat, sans-serif;
+}
+
+/* ENLACE AL PROYECTO */
+
+.cliente-link {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-top: 18px;
+  padding-top: 14px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+  color: var(--gold);
+  font-size: 13px;
+  font-weight: 700;
+
+  transition: color 0.2s ease;
+}
+
+.cliente-link span {
+  font-size: 17px;
+  transition: transform 0.2s ease;
+}
+
+.cliente-link:hover {
+  color: #fff;
+}
+
+.cliente-link:hover span {
+  transform: translate(3px, -3px);
+}
+
+
+/* ==========================================================================
+   RESPONSIVE — TABLET
+   ========================================================================== */
+
+@media (max-width: 1000px) {
+
+  .exclientes-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-width: 750px;
+  }
+
+  .cliente-card:last-child {
+    grid-column: 1 / -1;
+    max-width: 360px;
+    width: 100%;
+    justify-self: center;
+  }
+
+}
+
+
+/* ==========================================================================
+   RESPONSIVE — MÓVIL
+   ========================================================================== */
+
+@media (max-width: 650px) {
+
+  .exclientes {
+    padding: 65px 16px 75px;
+  }
+
+  .exclientes-header {
+    margin-bottom: 35px;
+  }
+
+  .exclientes-header h2 {
+    font-size: clamp(30px, 8.5vw, 40px);
+    letter-spacing: -1px;
+  }
+
+  .exclientes-subtitle {
+    font-size: 14px;
+  }
+
+  .exclientes-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cliente-card:last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .cliente-imagen {
+    aspect-ratio: 16 / 9;
+  }
+
+  .cliente-contenido {
+    padding: 21px 20px;
+  }
+
+  .cliente-contenido blockquote {
+    font-size: 14px;
+    line-height: 1.75;
+  }
+
+}
+
+
+/* ACCESIBILIDAD */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .cliente-card,
+  .cliente-imagen img,
+  .cliente-link span {
+    transition: none;
+  }
+
+}
+
+
+/* ==========================================================================
+   FIN DE LA HOJA DE ESTILOS
+   ========================================================================== */
