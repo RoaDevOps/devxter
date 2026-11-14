@@ -34,6 +34,23 @@ export class ParticleIntro {
   private pointer = { x: -9999, y: -9999, radius: 75 };
   private timeline: gsap.core.Timeline | null = null;
 
+  private handleMouseMove = (e: MouseEvent): void => {
+    this.pointer.x = e.clientX;
+    this.pointer.y = e.clientY;
+  };
+
+  private handleTouchMove = (e: TouchEvent): void => {
+    if (e.touches.length > 0) {
+      this.pointer.x = e.touches[0].clientX;
+      this.pointer.y = e.touches[0].clientY;
+    }
+  };
+
+  private handlePointerLeave = (): void => {
+    this.pointer.x = -9999;
+    this.pointer.y = -9999;
+  };
+
   constructor(overlayId = 'intro-overlay', canvasId = 'intro-canvas') {
     const overlay = document.getElementById(overlayId);
     const canvas = document.getElementById(canvasId) as HTMLCanvasElement | null;
@@ -108,6 +125,7 @@ export class ParticleIntro {
         textAlign: 'center',
         pointerEvents: 'none',
         opacity: '0',
+        visibility: 'hidden',
         transform: 'translateY(16px)'
       });
     }
@@ -116,50 +134,29 @@ export class ParticleIntro {
   private resizeCanvas = (): void => {
     const width = window.innerWidth;
     const height = window.innerHeight;
-    // Soportamos hasta 3x de DPR para nitidez total en pantallas móviles Retina/AMOLED
     const dpr = Math.min(window.devicePixelRatio || 1, 3);
 
     this.canvas.width = width * dpr;
     this.canvas.height = height * dpr;
     this.canvas.style.width = `${width}px`;
     this.canvas.style.height = `${height}px`;
-
     this.ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   };
 
   private bindEvents(): void {
     window.addEventListener('resize', this.resizeCanvas);
-
-    window.addEventListener('mousemove', (e: MouseEvent) => {
-      this.pointer.x = e.clientX;
-      this.pointer.y = e.clientY;
-    });
-
-    window.addEventListener(
-      'touchmove',
-      (e: TouchEvent) => {
-        if (e.touches.length > 0) {
-          this.pointer.x = e.touches[0].clientX;
-          this.pointer.y = e.touches[0].clientY;
-        }
-      },
-      { passive: true }
-    );
-
-    const clearPointer = (): void => {
-      this.pointer.x = -9999;
-      this.pointer.y = -9999;
-    };
-
-    window.addEventListener('touchend', clearPointer, { passive: true });
-    window.addEventListener('touchcancel', clearPointer, { passive: true });
-    window.addEventListener('mouseleave', clearPointer);
+    window.addEventListener('mousemove', this.handleMouseMove, { passive: true });
+    window.addEventListener('touchmove', this.handleTouchMove, { passive: true });
+    window.addEventListener('touchend', this.handlePointerLeave, { passive: true });
   }
 
-  /**
-   * Muestreo adaptativo HD: en móviles usa densidad alta (gap = 2) y tipografía grande
-   * para que las letras se formen con total nitidez sin verse borrosas.
-   */
+  private unbindEvents(): void {
+    window.removeEventListener('resize', this.resizeCanvas);
+    window.removeEventListener('mousemove', this.handleMouseMove);
+    window.removeEventListener('touchmove', this.handleTouchMove);
+    window.removeEventListener('touchend', this.handlePointerLeave);
+  }
+
   private sampleTextCoordinates(word: IntroStageWord): TargetPoint[] {
     const width = window.innerWidth;
     const height = window.innerHeight;
@@ -171,40 +168,25 @@ export class ParticleIntro {
     if (!offCtx) return [];
 
     const isMobile = width < 650;
-    const centerY = Math.round(height * 0.46);
+    const fontSize =
+      word === 'BIENVENIDO A'
+        ? Math.min(Math.max(width * (isMobile ? 0.1 : 0.08), 30), 102)
+        : Math.min(Math.max(width * (isMobile ? 0.16 : 0.125), 48), 150);
 
+    offCtx.font = `800 ${fontSize}px Montserrat, sans-serif`;
     offCtx.textAlign = 'center';
     offCtx.textBaseline = 'middle';
 
+    const centerY = height / 2;
+
     if (word === 'BIENVENIDO A') {
-      if (isMobile) {
-        // En móvil vertical dividimos en 2 líneas grandes para máxima nitidez
-        const mainSize = Math.min(Math.max(Math.floor(width * 0.125), 38), 58);
-        const subSize = Math.round(mainSize * 0.85);
-
-        offCtx.font = `800 ${mainSize}px Montserrat, sans-serif`;
-        offCtx.fillStyle = '#f5f4f0';
-        offCtx.fillText('BIENVENIDO', width / 2, centerY - mainSize * 0.65);
-
-        offCtx.font = `800 ${subSize}px Montserrat, sans-serif`;
-        offCtx.fillStyle = '#e9c66c';
-        offCtx.fillText('A', width / 2, centerY + mainSize * 0.65);
-      } else {
-        const fontSize = Math.min(Math.max(Math.floor(width * 0.075), 42), 96);
-        offCtx.font = `800 ${fontSize}px Montserrat, sans-serif`;
-        const grad = offCtx.createLinearGradient(width * 0.15, 0, width * 0.85, 0);
-        grad.addColorStop(0, '#f5f4f0');
-        grad.addColorStop(0.72, '#f5f4f0');
-        grad.addColorStop(1, '#e9c66c');
-        offCtx.fillStyle = grad;
-        offCtx.fillText('BIENVENIDO A', width / 2, centerY);
-      }
+      const grad = offCtx.createLinearGradient(width * 0.15, 0, width * 0.85, 0);
+      grad.addColorStop(0, '#f5f4f0');
+      grad.addColorStop(0.72, '#f5f4f0');
+      grad.addColorStop(1, '#e9c66c');
+      offCtx.fillStyle = grad;
+      offCtx.fillText('BIENVENIDO A', width / 2, centerY);
     } else {
-      const fontSize = isMobile
-        ? Math.min(Math.max(Math.floor(width * 0.175), 54), 84)
-        : Math.min(Math.max(Math.floor(width * 0.12), 64), 145);
-
-      offCtx.font = `800 ${fontSize}px Montserrat, sans-serif`;
       const part1 = 'DEV';
       const part2 = 'XTER';
       const w1 = offCtx.measureText(part1).width;
@@ -220,24 +202,22 @@ export class ParticleIntro {
       offCtx.fillText(part2, startX + w1, centerY);
     }
 
-    const imageData = offCtx.getImageData(0, 0, width, height).data;
+    const imgData = offCtx.getImageData(0, 0, width, height).data;
     const points: TargetPoint[] = [];
-    // En móvil muestreamos cada 2px para que las letras tengan alta definición
-    const gap = isMobile ? 2 : 4;
+    const step = isMobile ? 3 : 4;
 
-    for (let y = 0; y < height; y += gap) {
-      for (let x = 0; x < width; x += gap) {
-        const index = (y * width + x) * 4;
-        const alpha = imageData[index + 3];
-
-        if (alpha > 150) {
-          const r = imageData[index];
-          const g = imageData[index + 1];
-          const b = imageData[index + 2];
+    for (let y = 0; y < height; y += step) {
+      for (let x = 0; x < width; x += step) {
+        const idx = (y * width + x) * 4;
+        const alpha = imgData[idx + 3];
+        if (alpha > 128) {
+          const r = imgData[idx];
+          const g = imgData[idx + 1];
+          const b = imgData[idx + 2];
           points.push({
             x,
             y,
-            color: `rgb(${r}, ${g}, ${b})`
+            color: `rgb(${r},${g},${b})`
           });
         }
       }
@@ -252,7 +232,6 @@ export class ParticleIntro {
     const height = window.innerHeight;
     const isMobile = width < 650;
 
-    // Tamaño de punto más fino en móvil para definición nítida sin empastar las letras
     const minSize = isMobile ? 0.85 : 1.25;
     const sizeRange = isMobile ? 0.45 : 1.1;
 
@@ -286,7 +265,7 @@ export class ParticleIntro {
       } else {
         p.tx = Math.random() * width;
         p.ty = Math.random() * height;
-        p.alpha = 0.08;
+        p.alpha = 0;
       }
     }
   }
@@ -299,10 +278,10 @@ export class ParticleIntro {
     for (const p of this.particles) {
       const dx = p.x - centerX;
       const dy = p.y - centerY;
-      const angle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 1.1;
-      const force = 1.4 + Math.random() * strength;
-      p.vx = Math.cos(angle) * force;
-      p.vy = Math.sin(angle) * force;
+      const angle = Math.atan2(dy, dx) + (Math.random() - 0.5) * 0.65;
+      const force = (0.5 + Math.random() * 1.1) * strength;
+      p.vx += Math.cos(angle) * force;
+      p.vy += Math.sin(angle) * force;
     }
   }
 
@@ -312,11 +291,12 @@ export class ParticleIntro {
     const width = window.innerWidth;
     const height = window.innerHeight;
 
-    // Limpieza más alta (0.42) para evitar estelas borrosas en pantallas pequeñas
-    this.ctx.fillStyle = 'rgba(7, 7, 9, 0.42)';
+    this.ctx.fillStyle = 'rgba(7, 7, 9, 0.34)';
     this.ctx.fillRect(0, 0, width, height);
 
     for (const p of this.particles) {
+      if (p.alpha <= 0.01) continue;
+
       if (!this.isDispersing) {
         const dx = p.tx - p.x;
         const dy = p.ty - p.y;
@@ -324,16 +304,16 @@ export class ParticleIntro {
         p.vy += dy * p.ease;
       }
 
-      const mdx = p.x - this.pointer.x;
-      const mdy = p.y - this.pointer.y;
-      const distSq = mdx * mdx + mdy * mdy;
+      const pdx = p.x - this.pointer.x;
+      const pdy = p.y - this.pointer.y;
+      const distSq = pdx * pdx + pdy * pdy;
       const maxDistSq = this.pointer.radius * this.pointer.radius;
 
-      if (distSq < maxDistSq && distSq > 0) {
+      if (distSq < maxDistSq && distSq > 0.001) {
         const dist = Math.sqrt(distSq);
         const force = (this.pointer.radius - dist) / this.pointer.radius;
-        p.vx += (mdx / dist) * force * 2.0;
-        p.vy += (mdy / dist) * force * 2.0;
+        p.vx += (pdx / dist) * force * 2.4;
+        p.vy += (pdy / dist) * force * 2.4;
       }
 
       p.vx *= p.friction;
@@ -341,14 +321,12 @@ export class ParticleIntro {
       p.x += p.vx;
       p.y += p.vy;
 
-      this.ctx.globalAlpha = p.alpha;
       this.ctx.fillStyle = p.color;
       this.ctx.beginPath();
       this.ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
       this.ctx.fill();
     }
 
-    this.ctx.globalAlpha = 1;
     this.animationFrameId = requestAnimationFrame(this.renderLoop);
   };
 
@@ -365,11 +343,12 @@ export class ParticleIntro {
     document.querySelectorAll('.hero .reveal').forEach((el) => el.classList.add('visible'));
 
     this.applyFullscreenStyles();
+    this.bindEvents();
     document.body.classList.add('intro-active');
     document.body.style.overflow = 'hidden';
 
     if (this.subtitleEl) {
-      gsap.set(this.subtitleEl, { opacity: 0, y: 16 });
+      gsap.set(this.subtitleEl, { opacity: 0, visibility: 'hidden', y: 16 });
     }
 
     this.resizeCanvas();
@@ -396,11 +375,12 @@ export class ParticleIntro {
         this.isDispersing = false;
         this.morphToWord('DEVXTER');
         if (this.subtitleEl) {
+          gsap.set(this.subtitleEl, { visibility: 'visible' });
           gsap.to(this.subtitleEl, {
             opacity: 1,
             y: 0,
-            duration: 1.2,
-            delay: 0.6,
+            duration: 1.1,
+            delay: 0.5,
             ease: 'power2.out'
           });
         }
@@ -411,27 +391,38 @@ export class ParticleIntro {
 
     this.timeline.call(
       () => {
+        if (this.subtitleEl) {
+          gsap.to(this.subtitleEl, {
+            opacity: 0,
+            y: -10,
+            duration: 0.45,
+            ease: 'power2.in'
+          });
+        }
+      },
+      [],
+      7.75
+    );
+
+    this.timeline.call(
+      () => {
         this.triggerSlowDispersion(5.0);
         document.body.classList.remove('intro-active');
         document.body.style.overflow = '';
         document.body.style.overflowY = 'auto';
-        document.documentElement.style.overflow = '';
-        document.documentElement.style.overflowY = 'auto';
-        window.scrollTo(0, 0);
-        window.dispatchEvent(new CustomEvent('intro:reveal'));
       },
       [],
-      7.6
+      8.0
     );
 
     this.timeline.to(
       this.overlay,
       {
         opacity: 0,
-        duration: 1.0,
+        duration: 1.05,
         ease: 'power2.inOut'
       },
-      7.7
+      8.05
     );
   }
 
@@ -441,14 +432,17 @@ export class ParticleIntro {
       cancelAnimationFrame(this.animationFrameId);
       this.animationFrameId = null;
     }
-
+    this.unbindEvents();
+    this.particles = [];
+    if (this.subtitleEl) {
+      this.subtitleEl.style.opacity = '0';
+      this.subtitleEl.style.visibility = 'hidden';
+    }
     this.overlay.style.display = 'none';
+    this.overlay.style.visibility = 'hidden';
     this.overlay.style.pointerEvents = 'none';
     document.body.classList.remove('intro-active');
     document.body.style.overflow = '';
     document.body.style.overflowY = 'auto';
-    document.documentElement.style.overflow = '';
-    document.documentElement.style.overflowY = 'auto';
-    window.dispatchEvent(new CustomEvent('intro:reveal'));
   }
 }
